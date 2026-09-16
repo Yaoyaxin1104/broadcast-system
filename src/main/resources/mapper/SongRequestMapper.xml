@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.grbroadcast.dao.SongRequestMapper">
+
+    <!-- 通用结果映射 -->
+    <resultMap id="BaseResultMap" type="com.grbroadcast.entity.SongRequest">
+        <id column="id" property="id"/>
+        <result column="student_id" property="studentId"/>
+        <result column="song_name" property="songName"/>
+        <result column="singer" property="singer"/>
+        <result column="message" property="message"/>
+        <result column="status" property="status"/>
+        <result column="audit_time" property="auditTime"/>
+        <result column="play_time" property="playTime"/>
+        <result column="create_time" property="createTime"/>
+    </resultMap>
+
+    <!-- 多表关联结果映射 -->
+    <resultMap id="ExtendResultMap" type="com.grbroadcast.entity.SongRequest" extends="BaseResultMap">
+        <association property="student" javaType="com.grbroadcast.entity.User">
+            <id column="user_id" property="id"/>
+            <result column="real_name" property="realName"/>
+            <result column="student_id" property="studentId"/>
+            <result column="username" property="username"/>
+        </association>
+    </resultMap>
+
+    <!-- 1. 多表关联查询所有点歌记录（带学生信息） -->
+    <select id="getAllWithStudent" resultType="java.util.LinkedHashMap">
+        SELECT
+            sr.id,
+            sr.student_id,
+            sr.song_name,
+            sr.singer,
+            sr.message,
+            sr.status,
+            sr.audit_time,
+            sr.play_time,
+            sr.create_time,
+            u.real_name as student_name,
+            u.student_id as student_no,
+            u.username
+        FROM song_request sr
+                 LEFT JOIN user u ON sr.student_id = u.id
+        ORDER BY sr.create_time DESC
+    </select>
+
+    <!-- 2. 根据ID查询点歌详情（多表关联） -->
+    <select id="getSongRequestWithStudent" resultType="java.util.LinkedHashMap">
+        SELECT
+            sr.id,
+            sr.student_id,
+            sr.song_name,
+            sr.singer,
+            sr.message,
+            sr.status,
+            sr.audit_time,
+            sr.play_time,
+            sr.create_time,
+            u.real_name as student_name,
+            u.student_id as student_no,
+            u.username,
+            u.phone,
+            u.email
+        FROM song_request sr
+                 LEFT JOIN user u ON sr.student_id = u.id
+        WHERE sr.id = #{id}
+    </select>
+
+    <!-- 3. 根据学生ID查询点歌记录（带学生信息） -->
+    <select id="getByStudentIdWithInfo" resultType="java.util.LinkedHashMap">
+        SELECT
+            sr.id,
+            sr.student_id,
+            sr.song_name,
+            sr.singer,
+            sr.message,
+            sr.status,
+            sr.audit_time,
+            sr.play_time,
+            sr.create_time,
+            u.real_name as student_name,
+            u.student_id as student_no
+        FROM song_request sr
+                 LEFT JOIN user u ON sr.student_id = u.id
+        WHERE sr.student_id = #{studentId}
+        ORDER BY sr.create_time DESC
+    </select>
+
+    <!-- 4. 根据状态查询点歌记录（带学生信息） -->
+    <select id="getByStatusWithInfo" resultType="java.util.LinkedHashMap">
+        SELECT
+            sr.id,
+            sr.student_id,
+            sr.song_name,
+            sr.singer,
+            sr.message,
+            sr.status,
+            sr.audit_time,
+            sr.play_time,
+            sr.create_time,
+            u.real_name as student_name,
+            u.student_id as student_no
+        FROM song_request sr
+                 LEFT JOIN user u ON sr.student_id = u.id
+        WHERE sr.status = #{status}
+        ORDER BY sr.create_time DESC
+    </select>
+
+    <!-- 5. 根据学生ID查询（基础版） -->
+    <select id="findByStudentId" resultMap="BaseResultMap">
+        SELECT * FROM song_request
+        WHERE student_id = #{studentId}
+        ORDER BY create_time DESC
+    </select>
+
+    <!-- 6. 根据状态查询（基础版） -->
+    <select id="findByStatus" resultMap="BaseResultMap">
+        SELECT * FROM song_request
+        WHERE status = #{status}
+        ORDER BY create_time DESC
+    </select>
+
+    <!-- 7. 更新审核状态 -->
+    <update id="updateStatus">
+        UPDATE song_request
+        SET status = #{status}, audit_time = NOW()
+        WHERE id = #{id}
+    </update>
+
+    <!-- 8. 检查记录是否存在 -->
+    <select id="existsById" resultType="int">
+        SELECT COUNT(*) FROM song_request WHERE id = #{id}
+    </select>
+
+    <!-- 9. 查询待审核记录 -->
+    <select id="findPending" resultMap="ExtendResultMap">
+        SELECT sr.*, u.id as user_id, u.real_name, u.student_id
+        FROM song_request sr
+                 LEFT JOIN user u ON sr.student_id = u.id
+        WHERE sr.status = 'pending'
+        ORDER BY sr.create_time ASC
+    </select>
+
+    <!-- 10. 统计各状态数量 -->
+    <select id="countByStatus" resultType="java.util.LinkedHashMap">
+        SELECT status, COUNT(*) as count
+        FROM song_request
+        GROUP BY status
+    </select>
+</mapper>

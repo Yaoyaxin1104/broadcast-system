@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>稿件管理 - 全部稿件</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Microsoft YaHei', sans-serif; background: #f0f2f5; padding: 20px; }
+        .header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 15px 30px; border-radius: 8px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+        .header a { color: white; text-decoration: none; background: rgba(255,255,255,0.2); padding: 5px 15px; border-radius: 4px; }
+        .card { background: white; border-radius: 8px; padding: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+        .card-title { font-size: 18px; font-weight: bold; margin-bottom: 15px; padding-bottom: 10px; border-bottom: 2px solid #667eea; }
+        .btn { padding: 8px 20px; border: none; border-radius: 4px; cursor: pointer; }
+        .btn-primary { background: #667eea; color: white; }
+        .btn-success { background: #28a745; color: white; }
+        .btn-danger { background: #dc3545; color: white; }
+        .btn-warning { background: #ffc107; color: #333; }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { padding: 12px; text-align: left; border-bottom: 1px solid #eee; }
+        th { background: #f8f9fa; }
+        .status { padding: 4px 12px; border-radius: 20px; font-size: 12px; }
+        .status-pending { background: #fff3cd; color: #856404; }
+        .status-approved { background: #d4edda; color: #155724; }
+        .status-rejected { background: #f8d7da; color: #721c24; }
+        .back-btn { display: inline-block; margin-top: 20px; color: #667eea; text-decoration: none; }
+        .toolbar { display: flex; gap: 10px; margin-bottom: 15px; flex-wrap: wrap; }
+    </style>
+</head>
+<body>
+<div class="header">
+    <div>📝 稿件管理</div>
+    <div>
+        <a href="addArticle.html">➕ 新增</a>
+        <a href="searchArticle.html">🔍 查询</a>
+        <a href="../index.html" style="margin-left:10px;">🏠 首页</a>
+    </div>
+</div>
+<div class="card">
+    <div class="card-title">📋 全部稿件列表（allArticle.html）</div>
+    <div class="toolbar">
+        <input type="text" placeholder="搜索标题..." style="padding:8px;border:1px solid #ddd;border-radius:4px;width:200px;">
+        <button class="btn btn-primary">搜索</button>
+        <button class="btn btn-success" onclick="location.href='addArticle.html'">+ 新增稿件</button>
+        <button class="btn btn-danger">批量删除</button>
+    </div>
+    <table>
+        <thead>
+        <tr><th><input type="checkbox"></th><th>ID</th><th>标题</th><th>类型</th><th>作者</th><th>状态</th><th>投稿时间</th><th>操作</th></tr>
+        </thead>
+        <tbody>
+        <tr><td><input type="checkbox"></td><td>1</td><td>青春飞扬，梦想起航</td><td>故事随笔</td><td>张三</td><td><span class="status status-pending">待审核</span></td><td>2026-06-27</td><td><button class="btn btn-success" style="padding:4px 10px;font-size:12px;">审核</button> <button class="btn btn-danger" style="padding:4px 10px;font-size:12px;">删除</button></td></tr>
+        <tr><td><input type="checkbox"></td><td>2</td><td>广软校园新闻简报</td><td>新闻稿</td><td>李四</td><td><span class="status status-approved">已通过</span></td><td>2026-06-26</td><td><button class="btn btn-success" style="padding:4px 10px;font-size:12px;">审核</button> <button class="btn btn-danger" style="padding:4px 10px;font-size:12px;">删除</button></td></tr>
+        <tr><td><input type="checkbox"></td><td>3</td><td>毕业季的青春回忆</td><td>诗歌散文</td><td>王五</td><td><span class="status status-pending">待审核</span></td><td>2026-06-25</td><td><button class="btn btn-success" style="padding:4px 10px;font-size:12px;">审核</button> <button class="btn btn-danger" style="padding:4px 10px;font-size:12px;">删除</button></td></tr>
+        </tbody>
+    </table>
+    <a href="../index.html" class="back-btn">← 返回首页</a>
+</div>
+</body>
+</html>

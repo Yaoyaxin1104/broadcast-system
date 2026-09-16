@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>学生端 - 广软广播站</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Microsoft YaHei', sans-serif; background: #f0f2f5; }
+        .header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 15px 30px; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 24px; font-weight: bold; }
+        .user-info { display: flex; align-items: center; gap: 15px; }
+        .user-info button { background: rgba(255,255,255,0.2); border: none; color: white; padding: 5px 15px; border-radius: 4px; cursor: pointer; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+        .card { background: white; border-radius: 12px; padding: 20px; margin-bottom: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+        .card-title { font-size: 18px; font-weight: bold; margin-bottom: 15px; padding-bottom: 10px; border-bottom: 2px solid #667eea; }
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; font-weight: bold; margin-bottom: 5px; color: #333; }
+        .form-group input, .form-group textarea, .form-group select { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 8px; }
+        .form-group textarea { min-height: 80px; resize: vertical; }
+        .btn { padding: 10px 25px; border: none; border-radius: 8px; cursor: pointer; }
+        .btn-primary { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .program-item { background: #f8f9fa; padding: 15px; border-radius: 8px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; }
+        .program-date { color: #667eea; font-weight: bold; }
+        .status { padding: 4px 12px; border-radius: 20px; font-size: 12px; }
+        .status-pending { background: #fff3cd; color: #856404; }
+        .status-approved { background: #d4edda; color: #155724; }
+        .status-rejected { background: #f8d7da; color: #721c24; }
+        .message-item { background: #f8f9fa; padding: 15px; border-radius: 8px; margin-bottom: 10px; }
+        .message-item .time { color: #999; font-size: 12px; float: right; }
+        .reply-box { background: #e9ecef; padding: 10px; border-radius: 8px; margin-top: 8px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        th, td { padding: 10px; text-align: left; border-bottom: 1px solid #eee; }
+        th { background: #f8f9fa; }
+        .tabs { display: flex; gap: 5px; margin-bottom: 20px; flex-wrap: wrap; }
+        .tab { padding: 10px 25px; border: none; background: white; border-radius: 8px; cursor: pointer; }
+        .tab.active { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+        .toast { position: fixed; top: 20px; right: 20px; padding: 12px 25px; border-radius: 8px; color: white; z-index: 9999; }
+        .toast-success { background: #28a745; }
+        .toast-error { background: #dc3545; }
+        .toast-info { background: #667eea; }
+        .hidden { display: none; }
+    </style>
+</head>
+<body>
+<div class="header">
+    <div class="logo">🎙️ 广软广播站</div>
+    <div class="user-info">
+        <span id="userName">学生</span>
+        <button onclick="logout()">退出</button>
+    </div>
+</div>
+
+<div class="container">
+    <!-- 标签页 -->
+    <div class="tabs">
+        <button class="tab active" onclick="switchTab('home')">🏠 首页</button>
+        <button class="tab" onclick="switchTab('song')">🎵 点歌申请</button>
+        <button class="tab" onclick="switchTab('article')">📝 稿件投稿</button>
+        <button class="tab" onclick="switchTab('program')">📅 节目单</button>
+        <button class="tab" onclick="switchTab('message')">💬 留言板</button>
+    </div>
+
+    <!-- 首页 -->
+    <div id="homeTab" class="tab-content active">
+        <div class="grid-2">
+            <div class="card" onclick="switchTab('song')" style="cursor:pointer;text-align:center;padding:40px;">
+                <div style="font-size:48px;">🎵</div>
+                <h3>点歌申请</h3>
+                <p style="color:#999;">提交你想听的歌曲</p>
+            </div>
+            <div class="card" onclick="switchTab('article')" style="cursor:pointer;text-align:center;padding:40px;">
+                <div style="font-size:48px;">📝</div>
+                <h3>稿件投稿</h3>
+                <p style="color:#999;">分享你的文字作品</p>
+            </div>
+            <div class="card" onclick="switchTab('program')" style="cursor:pointer;text-align:center;padding:40px;">
+                <div style="font-size:48px;">📅</div>
+                <h3>节目单</h3>
+                <p style="color:#999;">查看本周节目</p>
+            </div>
+            <div class="card" onclick="switchTab('message')" style="cursor:pointer;text-align:center;padding:40px;">
+                <div style="font-size:48px;">💬</div>
+                <h3>留言板</h3>
+                <p style="color:#999;">发表你的想法</p>
+            </div>
+        </div>
+    </div>
+    <!-- 点歌申请 -->
+    <div id="songTab" class="tab-content">
+        <div class="card">
+            <div class="card-title">🎵 点歌申请</div>
+            <div class="form-group">
+                <label>歌曲名称</label>
+                <input type="text" id="songName" placeholder="请输入歌曲名称">
+            </div>
+            <div class="form-group">
+                <label>歌手</label>
+                <input type="text" id="singer" placeholder="请输入歌手">
+            </div>
+            <div class="form-group">
+                <label>点歌留言</label>
+                <textarea id="songMsg" placeholder="想说的话..."></textarea>
+            </div>
+            <button class="btn btn-primary" onclick="submitSong()">提交点歌</button>
+        </div>
+        <div class="card">
+            <div class="card-title">📋 我的点歌记录</div>
+            <div id="mySongList"><p style="color:#999;">暂无记录</p></div>
+        </div>
+    </div>
+
+    <!-- 稿件投稿 -->
+    <div id="articleTab" class="tab-content">
+        <div class="card">
+            <div class="card-title">📝 稿件投稿</div>
+            <div class="form-group">
+                <label>标题</label>
+                <input type="text" id="articleTitle" placeholder="请输入标题">
+            </div>
+            <div class="form-group">
+                <label>类型</label>
+                <select id="articleType">
+                    <option value="news">新闻稿</option>
+                    <option value="story">故事随笔</option>
+                    <option value="poem">诗歌散文</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>内容</label>
+                <textarea id="articleContent" placeholder="请输入内容..."></textarea>
+            </div>
+            <button class="btn btn-primary" onclick="submitArticle()">提交稿件</button>
+        </div>
+    </div>
+
+    <!-- 节目单 -->
+    <div id="programTab" class="tab-content">
+        <div class="card">
+            <div class="card-title">📅 本周节目单</div>
+            <div id="programList"><p style="color:#999;">加载中...</p></div>
+        </div>
+    </div>
+
+    <!-- 留言板 -->
+    <div id="messageTab" class="tab-content">
+        <div class="card">
+            <div class="card-title">💬 发布留言</div>
+            <div class="form-group">
+                <textarea id="msgContent" placeholder="写下你的留言..." rows="3"></textarea>
+            </div>
+            <button class="btn btn-primary" onclick="postMessage()">发布留言</button>
+        </div>
+        <div class="card">
+            <div class="card-title">📋 留言列表</div>
+            <div id="messageList"><p style="color:#999;">暂无留言</p></div>
+        </div>
+    </div>
+</div>
+
+<!-- Toast -->
+<div id="toastContainer"></div>
+
+<script>
+    const API_BASE = 'http://localhost:8089/api';
+    let currentUser = null;
+
+    // ========== 获取当前用户 ==========
+    function getCurrentUser() {
+        const userStr = localStorage.getItem('currentUser');
+        if (userStr) {
+            try {
+                return JSON.parse(userStr);
+            } catch(e) {
+                return null;
+            }
+        }
+        return null;
+    }
+
+    // ========== 初始化 ==========
+    document.addEventListener('DOMContentLoaded', function() {
+        const user = getCurrentUser();
+        if (user) {
+            currentUser = user;
+            document.getElementById('userName').textContent = '学生：' + (user.realName || user.username);
+            loadMySongs();
+            loadPrograms();
+            loadMessages();
+        } else {
+            window.location.href = 'login.html';
+        }
+    });
+
+    // ========== 切换标签 ==========
+    function switchTab(tab) {
+        document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+        document.querySelectorAll('.tab').forEach(el => el.classList.remove('active'));
+        document.getElementById(tab + 'Tab').classList.add('active');
+        event.target.classList.add('active');
+        if (tab === 'song') loadMySongs();
+        if (tab === 'program') loadPrograms();
+        if (tab === 'message') loadMessages();
+    }
+
+    // ========== Toast ==========
+    function showToast(msg, type) {
+        const div = document.createElement('div');
+        div.className = 'toast toast-' + type;
+        div.textContent = msg;
+        document.getElementById('toastContainer').appendChild(div);
+        setTimeout(() => div.remove(), 3000);
+    }
+
+    // ========== 退出 ==========
+    function logout() {
+        localStorage.removeItem('currentUser');
+        window.location.href = 'login.html';
+    }
+
+    // ========== 1. 提交点歌 ==========
+    function submitSong() {
+        const user = getCurrentUser();
+        if (!user) { showToast('请先登录', 'error'); return; }
+
+        const songName = document.getElementById('songName').value;
+        const singer = document.getElementById('singer').value;
+        const message = document.getElementById('songMsg').value;
+        if (!songName || !singer) {
+            showToast('请填写歌曲名称和歌手', 'error');
+            return;
+        }
+        //发送请求到后端
+        fetch(API_BASE + '/song/add?userId=' + user.id, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ songName, singer, message })
+        })
+            .then(res => res.json())
+            .then(data => {
+                showToast(data.msg || '提交成功', data.code === 200 ? 'success' : 'error');
+                if (data.code === 200) {
+                    document.getElementById('songName').value = '';
+                    document.getElementById('singer').value = '';
+                    document.getElementById('songMsg').value = '';
+                    loadMySongs();
+                }
+            })
+            .catch(err => showToast('请求失败', 'error'));
+    }
+
+    // ========== 2. 加载我的点歌 ==========
+    function loadMySongs() {
+        const user = getCurrentUser();
+        if (!user) { document.getElementById('mySongList').innerHTML = '<p style="color:#999;">请先登录</p>'; return; }
+
+        fetch(API_BASE + '/song/my?userId=' + user.id)
+            .then(res => res.json())
+            .then(data => {
+                if (data.code === 200 && data.data && data.data.length > 0) {
+                    let html = `<table><thead><tr><th>歌曲</th><th>歌手</th><th>状态</th><th>时间</th></tr></thead><tbody>`;
+                    data.data.forEach(s => {
+                        const statusMap = {
+                            'pending': '<span class="status status-pending">待审核</span>',
+                            'approved': '<span class="status status-approved">已通过</span>',
+                            'rejected': '<span class="status status-rejected">已拒绝</span>'
+                        };
+                        html += `<tr><td>${s.songName || s.song_name}</td><td>${s.singer}</td><td>${statusMap[s.status] || s.status}</td><td>${s.createTime || s.create_time}</td></tr>`;
+                    });
+                    html += `</tbody></table>`;
+                    document.getElementById('mySongList').innerHTML = html;
+                } else {
+                    document.getElementById('mySongList').innerHTML = '<p style="color:#999;">暂无点歌记录</p>';
+                }
+            })
+            .catch(() => document.getElementById('mySongList').innerHTML = '<p style="color:#999;">加载失败</p>');
+    }
+
+    // ========== 3. 提交稿件 ==========
+    function submitArticle() {
+        const user = getCurrentUser();
+        if (!user) { showToast('请先登录', 'error'); return; }
+
+        const title = document.getElementById('articleTitle').value;
+        const type = document.getElementById('articleType').value;
+        const content = document.getElementById('articleContent').value;
+        if (!title || !content) {
+            showToast('请填写标题和内容', 'error');
+            return;
+        }
+        fetch(API_BASE + '/article/add?userId=' + user.id, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ title, type, content })
+        })
+            .then(res => res.json())
+            .then(data => {
+                showToast(data.msg || '投稿成功', data.code === 200 ? 'success' : 'error');
+                if (data.code === 200) {
+                    document.getElementById('articleTitle').value = '';
+                    document.getElementById('articleContent').value = '';
+                }
+            })
+            .catch(err => showToast('请求失败', 'error'));
+    }
+
+    // ========== 4. 加载节目单 ==========
+    function loadPrograms() {
+        fetch(API_BASE + '/program/list')
+            .then(res => res.json())
+            .then(data => {
+                if (data.code === 200 && data.data && data.data.length > 0) {
+                    document.getElementById('programList').innerHTML = data.data.map(p =>
+                        `<div class="program-item">
+                            <div><span class="program-date">${p.date}</span> ${p.programName || p.program_name}</div>
+                            <div>${p.timeSlot || p.time_slot}</div>
+                        </div>`
+                    ).join('');
+                } else {
+                    document.getElementById('programList').innerHTML = '<p style="color:#999;">暂无节目</p>';
+                }
+            })
+            .catch(() => document.getElementById('programList').innerHTML = '<p style="color:#999;">加载失败</p>');
+    }
+
+    // ========== 5. 发布留言 ==========
+    function postMessage() {
+        const user = getCurrentUser();
+        if (!user) { showToast('请先登录', 'error'); return; }
+
+        const content = document.getElementById('msgContent').value;
+        if (!content) { showToast('请输入留言内容', 'error'); return; }
+        fetch(API_BASE + '/message/add?userId=' + user.id, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ content })
+        })
+            .then(res => res.json())
+            .then(data => {
+                showToast(data.msg || '发布成功', data.code === 200 ? 'success' : 'error');
+                if (data.code === 200) {
+                    document.getElementById('msgContent').value = '';
+                    loadMessages();
+                }
+            })
+            .catch(err => showToast('请求失败', 'error'));
+    }
+
+    // ========== 6. 加载留言 ==========
+    function loadMessages() {
+        fetch(API_BASE + '/message/list')
+            .then(res => res.json())
+            .then(data => {
+                if (data.code === 200 && data.data && data.data.length > 0) {
+                    document.getElementById('messageList').innerHTML = data.data.map(m =>
+                        `<div class="message-item">
+                            <div><span class="time">${m.createTime || m.create_time}</span></div>
+                            <div>${m.content}</div>
+                            ${m.reply ? `<div class="reply-box">🎙️ 回复：${m.reply}</div>` : ''}
+                        </div>`
+                    ).join('');
+                } else {
+                    document.getElementById('messageList').innerHTML = '<p style="color:#999;">暂无留言</p>';
+                }
+            })
+            .catch(() => document.getElementById('messageList').innerHTML = '<p style="color:#999;">加载失败</p>');
+    }
+</script>
+</body>
+</html>

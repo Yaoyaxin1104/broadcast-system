@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>音频上传 - 广软广播站</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Microsoft YaHei', sans-serif; background: #f0f2f5; padding: 20px; }
+        .header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 15px 30px; border-radius: 8px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+        .header a { color: white; text-decoration: none; background: rgba(255,255,255,0.2); padding: 5px 15px; border-radius: 4px; }
+        .card { background: white; border-radius: 8px; padding: 25px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); max-width: 800px; margin-left: auto; margin-right: auto; }
+        .card-title { font-size: 18px; font-weight: bold; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 2px solid #667eea; }
+        .form-group { margin-bottom: 18px; }
+        .form-group label { display: block; font-weight: bold; margin-bottom: 5px; color: #333; }
+        .form-group input, .form-group textarea { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; font-size: 14px; }
+        .btn { padding: 10px 30px; border: none; border-radius: 4px; cursor: pointer; font-size: 14px; }
+        .btn-primary { background: #667eea; color: white; }
+        .btn-success { background: #28a745; color: white; }
+        .btn-danger { background: #dc3545; color: white; }
+        .btn-info { background: #17a2b8; color: white; }
+        .btn-sm { padding: 4px 12px; font-size: 12px; }
+        .upload-area { border: 2px dashed #ddd; border-radius: 8px; padding: 40px; text-align: center; cursor: pointer; transition: all 0.3s; margin-bottom: 15px; }
+        .upload-area:hover { border-color: #667eea; background: #f8f9fa; }
+        .upload-area .icon { font-size: 48px; }
+        .upload-area .text { color: #999; margin-top: 10px; }
+        .file-info { background: #f0f7ff; padding: 12px; border-radius: 4px; margin-bottom: 15px; display: none; }
+        .file-info .name { font-weight: bold; }
+        .file-info .size { color: #999; font-size: 12px; margin-left: 10px; }
+        .audio-item { display: flex; justify-content: space-between; align-items: center; padding: 12px 15px; background: #f8f9fa; border-radius: 4px; margin-bottom: 8px; }
+        .audio-item .name { font-weight: bold; }
+        .audio-item .info { color: #999; font-size: 12px; }
+        .audio-item .actions { display: flex; gap: 5px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        th, td { padding: 10px; text-align: left; border-bottom: 1px solid #eee; }
+        th { background: #f8f9fa; }
+        .status { padding: 4px 12px; border-radius: 20px; font-size: 12px; background: #d4edda; color: #155724; }
+        .toast { position: fixed; top: 20px; right: 20px; padding: 12px 25px; border-radius: 8px; color: white; z-index: 9999; animation: slideIn 0.3s; }
+        .toast-success { background: #28a745; }
+        .toast-error { background: #dc3545; }
+        .toast-info { background: #667eea; }
+        @keyframes slideIn { from { transform: translateX(100px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+        .back-btn { display: inline-block; margin-top: 20px; color: #667eea; text-decoration: none; }
+        .progress-bar { width: 100%; height: 6px; background: #eee; border-radius: 3px; margin-top: 10px; display: none; }
+        .progress-bar .progress { height: 100%; background: #667eea; border-radius: 3px; width: 0%; transition: width 0.3s; }
+    </style>
+</head>
+<body>
+
+<!-- 顶部导航 -->
+<div class="header">
+    <div>🎧 音频管理 - 上传与播放</div>
+    <div>
+        <a href="../index.html">🏠 返回首页</a>
+    </div>
+</div>
+
+<!-- 上传区域 -->
+<div class="card">
+    <div class="card-title">📤 上传音频文件</div>
+    <div class="form-group">
+        <label>🎵 音频标题</label>
+        <input type="text" id="audioTitle" placeholder="请输入音频标题">
+    </div>
+    <div class="upload-area" onclick="document.getElementById('fileInput').click()">
+        <div class="icon">📁</div>
+        <div class="text">点击选择文件 或 拖拽文件到此处</div>
+        <div style="font-size:12px;color:#ccc;margin-top:5px;">支持 MP3、WAV、M4A 格式，最大 50MB</div>
+        <input type="file" id="fileInput" style="display:none;" accept=".mp3,.wav,.m4a" onchange="handleFileSelect(event)">
+    </div>
+    <div class="file-info" id="fileInfo">
+        <span class="name" id="fileName">未选择文件</span>
+        <span class="size" id="fileSize"></span>
+    </div>
+    <div class="progress-bar" id="progressBar">
+        <div class="progress" id="progress"></div>
+    </div>
+    <button class="btn btn-success" onclick="uploadAudio()" id="uploadBtn">⬆️ 上传</button>
+</div>
+
+<!-- 已上传列表 -->
+<div class="card">
+    <div class="card-title">📋 已上传音频列表</div>
+    <div id="audioList">
+        <p style="color:#999;">加载中...</p>
+    </div>
+</div>
+
+<!-- Toast -->
+<div id="toastContainer"></div>
+
+<script>
+    // ==================== 配置 ====================
+    const API_BASE = 'http://localhost:8089/api';
+    let selectedFile = null;
+    // ==================== Toast ====================
+    function showToast(message, type) {
+        const container = document.getElementById('toastContainer');
+        const toast = document.createElement('div');
+        toast.className = 'toast toast-' + type;
+        toast.textContent = message;
+        container.appendChild(toast);
+        setTimeout(() => { toast.remove(); }, 3000);
+    }
+    // ==================== 文件选择 ====================
+    function handleFileSelect(event) {
+        const file = event.target.files[0];
+        if (file) {
+            selectedFile = file;
+            document.getElementById('fileName').textContent = file.name;
+            document.getElementById('fileSize').textContent = (file.size / 1024 / 1024).toFixed(2) + ' MB';
+            document.getElementById('fileInfo').style.display = 'block';
+        }
+    }
+    // ==================== 上传音频 ====================
+    function uploadAudio() {
+        const title = document.getElementById('audioTitle').value;
+        if (!title) {
+            showToast('请输入音频标题', 'error');
+            return;
+        }
+        if (!selectedFile) {
+            showToast('请选择音频文件', 'error');
+            return;
+        }
+
+        const userStr = localStorage.getItem('currentUser');
+        if (!userStr) {
+            showToast('请先登录', 'error');
+            return;
+        }
+        const user = JSON.parse(userStr);
+
+        //创建formdat对象来传文件
+        const formData = new FormData();
+        formData.append('file', selectedFile);
+        formData.append('title', title);
+        formData.append('userId', user.id);
+
+        // 显示进度条
+        document.getElementById('progressBar').style.display = 'block';
+        document.getElementById('progress').style.width = '0%';
+        document.getElementById('uploadBtn').disabled = true;
+        document.getElementById('uploadBtn').textContent = '⏳ 上传中...';
+
+        fetch(API_BASE + '/audio/upload?userId=' + user.id, {
+            method: 'POST',
+            body: formData
+        })
+            .then(res => res.json())
+            .then(data => {
+                document.getElementById('progress').style.width = '100%';
+                setTimeout(() => {
+                    document.getElementById('progressBar').style.display = 'none';
+                }, 500);
+
+                if (data.code === 200) {
+                    showToast(data.msg || '上传成功', 'success');
+                    document.getElementById('audioTitle').value = '';
+                    document.getElementById('fileInfo').style.display = 'none';
+                    selectedFile = null;
+                    document.getElementById('fileInput').value = '';
+                    loadAudioList();
+                } else {
+                    showToast(data.msg || '上传失败', 'error');
+                }
+                document.getElementById('uploadBtn').disabled = false;
+                document.getElementById('uploadBtn').textContent = '⬆️ 上传';
+            })
+            .catch(err => {
+                document.getElementById('progressBar').style.display = 'none';
+                document.getElementById('uploadBtn').disabled = false;
+                document.getElementById('uploadBtn').textContent = '⬆️ 上传';
+                showToast('请求失败', 'error');
+                console.error(err);
+            });
+    }
+    // ==================== 加载音频列表 ====================
+    function loadAudioList() {
+        fetch(API_BASE + '/audio/list')
+            .then(res => res.json())
+            .then(data => {
+                if (data.code === 200 && data.data && data.data.length > 0) {
+                    const audios = data.data;
+                    let html = `
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>标题</th>
+                                <th>文件名</th>
+                                <th>大小</th>
+                                <th>播放次数</th>
+                                <th>状态</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                `;
+                    audios.forEach(a => {
+                        const filePath = a.file_path || a.filePath || '';
+                        const fileName = filePath.split('/').pop() || '未知文件';
+                        html += `
+                        <tr>
+                            <td>${a.id}</td>
+                            <td>${a.title}</td>
+                            <td>${fileName}</td>
+                            <td>${a.file_size ? (a.file_size / 1024 / 1024).toFixed(2) + 'MB' : '-'}</td>
+                            <td>${a.play_count || 0}</td>
+                            <td><span class="status">${a.status === 1 ? '已上线' : '已下线'}</span></td>
+                            <td>
+                                <button class="btn btn-success btn-sm" onclick="downloadAudio(${a.id}, '${a.title}')">⬇️ 下载</button>
+                                <button class="btn btn-danger btn-sm" onclick="deleteAudio(${a.id})">删除</button>
+                            </td>
+                        </tr>
+                    `;
+                    });
+                    html += `</tbody></table>`;
+                    document.getElementById('audioList').innerHTML = html;
+                } else {
+                    document.getElementById('audioList').innerHTML = '<p style="color:#999;">暂无音频文件</p>';
+                }
+            })
+            .catch(err => {
+                document.getElementById('audioList').innerHTML = '<p style="color:red;">加载失败</p>';
+                console.error(err);
+            });
+    }
+
+    function playAudio(filePath) {
+        if (!filePath) {
+            showToast('音频文件不存在', 'error');
+            return;
+        }
+
+        // 构建完整播放地址
+        const audioUrl = 'http://localhost:8089' + filePath;
+        console.log('播放地址:', audioUrl);  // 调试用
+
+        // 移除旧播放器
+        const oldPlayer = document.querySelector('.audio-player-modal');
+        if (oldPlayer) oldPlayer.remove();
+
+        const modal = document.createElement('div');
+        modal.className = 'audio-player-modal';
+        modal.style.cssText = `
+        position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+        background: rgba(0,0,0,0.6); display: flex; justify-content: center;
+        align-items: center; z-index: 99999;
+    `;
+        modal.innerHTML = `
+        <div style="background:white;padding:30px;border-radius:12px;min-width:400px;text-align:center;">
+            <h3 style="margin-bottom:15px;">🎵 音频播放</h3>
+            <audio controls autoplay style="width:100%;margin-bottom:15px;">
+                <source src="${audioUrl}" type="audio/mpeg">
+                您的浏览器不支持音频播放
+            </audio>
+            <button class="btn btn-primary" onclick="this.closest('.audio-player-modal').remove()">关闭</button>
+        </div>
+    `;
+        document.body.appendChild(modal);
+
+        modal.addEventListener('click', function(e) {
+            if (e.target === this) this.remove();
+        });
+    }
+
+    // ==================== 删除音频 ====================
+    function deleteAudio(id) {
+        if (!confirm('确认删除该音频吗？')) return;
+
+        const userStr = localStorage.getItem('currentUser');
+        if (!userStr) {
+            showToast('请先登录', 'error');
+            return;
+        }
+        const user = JSON.parse(userStr);
+
+        fetch(API_BASE + '/audio/delete/' + id + '?userId=' + user.id, {
+            method: 'DELETE'
+        })
+            .then(res => res.json())
+            .then(data => {
+                showToast(data.msg || '删除成功', 'success');
+                if (data.code === 200) loadAudioList();
+            })
+            .catch(err => {
+                showToast('请求失败', 'error');
+                console.error(err);
+            });
+    }
+    // ==================== 下载音频（通过后端接口） ====================
+    function downloadAudio(id, title) {
+        if (!id) {
+            showToast('音频ID不存在', 'error');
+            return;
+        }
+
+        // 直接打开下载链接
+        const downloadUrl = API_BASE + '/audio/download/' + id;
+        window.open(downloadUrl, '_blank');
+        showToast('开始下载：' + title, 'success');
+    }
+
+    // ==================== 初始化 ====================
+    document.addEventListener('DOMContentLoaded', function() {
+        // 检查登录状态
+        const userStr = localStorage.getItem('currentUser');
+        if (!userStr) {
+            window.location.href = '../login.html';
+            return;
+        }
+        loadAudioList();
+    });
+</script>
+</body>
+</html>

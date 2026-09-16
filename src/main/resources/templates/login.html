@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登录/注册 - 广软广播站</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Microsoft YaHei', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-image: url('images/bg.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 0;
+        }
+        .login-box {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 16px;
+            padding: 40px;
+            width: 420px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            position: relative;
+            z-index: 1;
+            backdrop-filter: blur(10px);
+        }
+        .login-title { text-align: center; font-size: 24px; font-weight: bold; color: #333; margin-bottom: 5px; }
+        .login-sub { text-align: center; color: #999; font-size: 14px; margin-bottom: 25px; }
+
+        .lang-switch {
+            display: flex;
+            justify-content: flex-end;
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+        .lang-switch button {
+            padding: 4px 12px;
+            border: 1px solid #667eea;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 13px;
+            background: white;
+            color: #667eea;
+            transition: all 0.3s;
+        }
+        .lang-switch button.active {
+            background: #667eea;
+            color: white;
+        }
+        .lang-switch button:hover { opacity: 0.8; }
+
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; font-weight: bold; margin-bottom: 5px; color: #333; }
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+            background: rgba(255,255,255,0.9);
+        }
+        .form-group input:focus, .form-group select:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
+        }
+        .btn { width: 100%; padding: 12px; border: none; border-radius: 8px; color: white; font-size: 16px; font-weight: bold; cursor: pointer; transition: opacity 0.3s; }
+        .btn:hover { opacity: 0.9; }
+        .btn-login { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+        .btn-register { background: #28a745; margin-top: 10px; }
+        .error { color: #dc3545; text-align: center; margin-bottom: 15px; font-size: 14px; padding: 8px; background: #f8d7da; border-radius: 4px; display: none; }
+        .success { color: #155724; text-align: center; margin-bottom: 15px; font-size: 14px; padding: 8px; background: #d4edda; border-radius: 4px; display: none; }
+        .footer { text-align: center; margin-top: 15px; color: #999; font-size: 12px; }
+        .toggle-link { text-align: center; margin-top: 15px; color: #667eea; cursor: pointer; font-size: 14px; }
+        .toggle-link:hover { text-decoration: underline; }
+        .hidden { display: none; }
+        .role-hint { font-size: 12px; color: #999; margin-top: 4px; }
+        .loading-text { color: #667eea; text-align: center; font-size: 13px; margin-top: 5px; }
+    </style>
+</head>
+<body>
+<div class="login-box">
+
+    <!-- 语言切换 -->
+    <div class="lang-switch">
+        <button id="langZh" class="active" onclick="switchLang('zh_CN')">🇨🇳 中文</button>
+        <button id="langEn" onclick="switchLang('en_US')">🇬🇧 English</button>
+    </div>
+
+    <div class="login-title" id="loginTitle">🎙️ 广软广播站</div>
+    <div class="login-sub" id="pageSub">点歌投稿系统</div>
+
+    <!-- 错误/成功提示 -->
+    <div class="error" id="errorMsg">❌ 错误信息</div>
+    <div class="success" id="successMsg">✅ 成功信息</div>
+
+    <!-- ========== 登录表单 ========== -->
+    <div id="loginForm">
+        <div class="form-group">
+            <label id="labelUsername">👤 用户名</label>
+            <input type="text" id="loginUsername" placeholder="请输入用户名" value="staff1">
+        </div>
+        <div class="form-group">
+            <label id="labelPassword">🔒 密码</label>
+            <input type="password" id="loginPassword" placeholder="请输入密码" value="123456">
+        </div>
+        <div class="form-group">
+            <label id="labelRole">🎭 身份</label>
+            <select id="loginRole">
+                <option value="student" id="optStudent">👨‍🎓 学生</option>
+                <option value="staff" selected id="optStaff">🎙️ 广播站成员</option>
+            </select>
+        </div>
+        <button class="btn btn-login" id="loginBtn" onclick="doLogin()">登 录</button>
+        <div id="loginLoading" class="loading-text"></div>
+        <div class="toggle-link" id="registerLink" onclick="showRegister()">还没有账号？立即注册 →</div>
+        <div class="footer" id="footerText">测试账号: student1 / 123456 &nbsp;|&nbsp; staff1 / 123456</div>
+    </div>
+
+    <!-- ========== 注册表单 ========== -->
+    <div id="registerForm" class="hidden">
+        <div class="form-group">
+            <label id="regLabelUsername">👤 用户名</label>
+            <input type="text" id="regUsername" placeholder="请设置用户名">
+        </div>
+        <div class="form-group">
+            <label id="regLabelPassword">🔒 密码</label>
+            <input type="password" id="regPassword" placeholder="请设置密码（至少6位）">
+        </div>
+        <div class="form-group">
+            <label id="regLabelRealName">📛 真实姓名</label>
+            <input type="text" id="regRealName" placeholder="请输入真实姓名">
+        </div>
+        <div class="form-group">
+            <label id="regLabelStudentId">🎓 学号</label>
+            <input type="text" id="regStudentId" placeholder="请输入学号">
+        </div>
+        <div class="form-group">
+            <label id="regLabelPhone">📱 手机号</label>
+            <input type="text" id="regPhone" placeholder="请输入手机号">
+        </div>
+        <div class="form-group">
+            <label id="regLabelEmail">📧 邮箱</label>
+            <input type="email" id="regEmail" placeholder="请输入邮箱">
+        </div>
+        <div class="form-group">
+            <label id="regLabelRole">🎭 身份</label>
+            <select id="regRole">
+                <option value="student" id="regOptStudent">👨‍🎓 学生</option>
+                <option value="staff" id="regOptStaff">🎙️ 广播站成员</option>
+            </select>
+            <div class="role-hint" id="roleHint">💡 学生身份可点歌、投稿、留言；广播站成员可审核管理</div>
+        </div>
+        <button class="btn btn-register" id="registerBtn" onclick="doRegister()">注 册</button>
+        <div id="registerLoading" class="loading-text"></div>
+        <div class="toggle-link" id="loginLink" onclick="showLogin()">已有账号？去登录 →</div>
+    </div>
+</div>
+
+<script>
+    const API_BASE = 'http://localhost:8089/api';
+    let currentLang = 'zh_CN';
+
+    // ==================== 国际化资源 ====================
+    const i18n = {
+        zh_CN: {
+            loginTitle: '🎙️ 广软广播站',
+            pageSub: '点歌投稿系统',
+            labelUsername: '👤 用户名',
+            labelPassword: '🔒 密码',
+            labelRole: '🎭 身份',
+            optStudent: '👨‍🎓 学生',
+            optStaff: '🎙️ 广播站成员',
+            optTeacher: '👨‍🏫 指导老师',
+            loginBtn: '登 录',
+            registerLink: '还没有账号？立即注册 →',
+            footerText: '测试账号: student1 / 123456 &nbsp;|&nbsp; staff1 / 123456',
+            regLabelUsername: '👤 用户名',
+            regLabelPassword: '🔒 密码',
+            regLabelRealName: '📛 真实姓名',
+            regLabelStudentId: '🎓 学号',
+            regLabelPhone: '📱 手机号',
+            regLabelEmail: '📧 邮箱',
+            regLabelRole: '🎭 身份',
+            regOptStudent: '👨‍🎓 学生',
+            regOptStaff: '🎙️ 广播站成员',
+            regOptTeacher: '👨‍🏫 指导老师',
+            roleHint: '💡 学生身份可点歌、投稿、留言；广播站成员可审核管理',
+            registerBtn: '注 册',
+            loginLink: '已有账号？去登录 →',
+            registerTitle: '注册新账号',
+            loginTitleBack: '点歌投稿系统',
+            errorMsg: '❌ 错误信息',
+            successMsg: '✅ 成功信息'
+        },
+        en_US: {
+            loginTitle: '🎙️ GR Radio Station',
+            pageSub: 'Song & Submission System',
+            labelUsername: '👤 Username',
+            labelPassword: '🔒 Password',
+            labelRole: '🎭 Role',
+            optStudent: '👨‍🎓 Student',
+            optStaff: '🎙️ Staff',
+            optTeacher: '👨‍🏫 Teacher',
+            loginBtn: 'Sign In',
+            registerLink: 'No account? Register →',
+            footerText: 'Test: student1 / 123456 &nbsp;|&nbsp; staff1 / 123456',
+            regLabelUsername: '👤 Username',
+            regLabelPassword: '🔒 Password',
+            regLabelRealName: '📛 Real Name',
+            regLabelStudentId: '🎓 Student ID',
+            regLabelPhone: '📱 Phone',
+            regLabelEmail: '📧 Email',
+            regLabelRole: '🎭 Role',
+            regOptStudent: '👨‍🎓 Student',
+            regOptStaff: '🎙️ Staff',
+            regOptTeacher: '👨‍🏫 Teacher',
+            roleHint: '💡 Students can request songs, submit articles, and post messages; Staff can review and manage',
+            registerBtn: 'Register',
+            loginLink: 'Already have an account? Login →',
+            registerTitle: 'Register New Account',
+            loginTitleBack: 'Song & Submission System',
+            errorMsg: '❌ Error Message',
+            successMsg: '✅ Success Message'
+        }
+    };
+
+    // ==================== 切换语言 ====================
+    function switchLang(lang) {
+        currentLang = lang;
+        localStorage.setItem('lang', lang);
+        document.getElementById('langZh').className = lang === 'zh_CN' ? 'active' : '';
+        document.getElementById('langEn').className = lang === 'en_US' ? 'active' : '';
+        updateI18n();
+    }
+
+    // ==================== 更新页面文字 ====================
+    function updateI18n() {
+        const t = i18n[currentLang];
+        const isRegister = document.getElementById('registerForm').classList.contains('hidden');
+
+        const el = document.getElementById('loginTitle');
+        if (el) el.textContent = t.loginTitle;
+
+        const sub = document.getElementById('pageSub');
+        if (sub) sub.textContent = isRegister ? t.pageSub : t.registerTitle;
+
+        const l1 = document.getElementById('labelUsername');
+        if (l1) l1.textContent = t.labelUsername;
+
+        const l2 = document.getElementById('labelPassword');
+        if (l2) l2.textContent = t.labelPassword;
+
+        const l3 = document.getElementById('labelRole');
+        if (l3) l3.textContent = t.labelRole;
+
+        const o1 = document.getElementById('optStudent');
+        if (o1) o1.textContent = t.optStudent;
+
+        const o2 = document.getElementById('optStaff');
+        if (o2) o2.textContent = t.optStaff;
+
+        const o3 = document.getElementById('optTeacher');
+        if (o3) o3.textContent = t.optTeacher;
+
+        const btn = document.getElementById('loginBtn');
+        if (btn) btn.textContent = t.loginBtn;
+
+        const link = document.getElementById('registerLink');
+        if (link) link.textContent = t.registerLink;
+
+        const footer = document.getElementById('footerText');
+        if (footer) footer.innerHTML = t.footerText;
+
+        const r1 = document.getElementById('regLabelUsername');
+        if (r1) r1.textContent = t.regLabelUsername;
+
+        const r2 = document.getElementById('regLabelPassword');
+        if (r2) r2.textContent = t.regLabelPassword;
+
+        const r3 = document.getElementById('regLabelRealName');
+        if (r3) r3.textContent = t.regLabelRealName;
+
+        const r4 = document.getElementById('regLabelStudentId');
+        if (r4) r4.textContent = t.regLabelStudentId;
+
+        const r5 = document.getElementById('regLabelPhone');
+        if (r5) r5.textContent = t.regLabelPhone;
+
+        const r6 = document.getElementById('regLabelEmail');
+        if (r6) r6.textContent = t.regLabelEmail;
+
+        const r7 = document.getElementById('regLabelRole');
+        if (r7) r7.textContent = t.regLabelRole;
+
+        const ro1 = document.getElementById('regOptStudent');
+        if (ro1) ro1.textContent = t.regOptStudent;
+
+        const ro2 = document.getElementById('regOptStaff');
+        if (ro2) ro2.textContent = t.regOptStaff;
+
+        const ro3 = document.getElementById('regOptTeacher');
+        if (ro3) ro3.textContent = t.regOptTeacher;
+
+        const hint = document.getElementById('roleHint');
+        if (hint) hint.textContent = t.roleHint;
+
+        const regBtn = document.getElementById('registerBtn');
+        if (regBtn) regBtn.textContent = t.registerBtn;
+
+        const loginLink = document.getElementById('loginLink');
+        if (loginLink) loginLink.textContent = t.loginLink;
+    }
+
+    // ==================== 切换登录/注册 ====================
+    function showRegister() {
+        document.getElementById('loginForm').classList.add('hidden');
+        document.getElementById('registerForm').classList.remove('hidden');
+        const sub = document.getElementById('pageSub');
+        if (sub) sub.textContent = i18n[currentLang].registerTitle;
+        hideMessages();
+    }
+
+    function showLogin() {
+        document.getElementById('registerForm').classList.add('hidden');
+        document.getElementById('loginForm').classList.remove('hidden');
+        const sub = document.getElementById('pageSub');
+        if (sub) sub.textContent = i18n[currentLang].pageSub;
+        hideMessages();
+    }
+
+    function hideMessages() {
+        const err = document.getElementById('errorMsg');
+        if (err) err.style.display = 'none';
+        const suc = document.getElementById('successMsg');
+        if (suc) suc.style.display = 'none';
+    }
+
+    function showError(msg) {
+        const el = document.getElementById('errorMsg');
+        if (el) {
+            el.textContent = '❌ ' + msg;
+            el.style.display = 'block';
+        }
+        const suc = document.getElementById('successMsg');
+        if (suc) suc.style.display = 'none';
+    }
+
+    function showSuccess(msg) {
+        const el = document.getElementById('successMsg');
+        if (el) {
+            el.textContent = '✅ ' + msg;
+            el.style.display = 'block';
+        }
+        const err = document.getElementById('errorMsg');
+        if (err) err.style.display = 'none';
+    }
+
+    // ========== 登录 ==========
+    function doLogin() {
+        const username = document.getElementById('loginUsername').value;
+        const password = document.getElementById('loginPassword').value;
+        hideMessages();
+
+        if (!username || !password) {
+            showError('请输入用户名和密码');
+            return;
+        }
+
+        const loading = document.getElementById('loginLoading');
+        if (loading) loading.textContent = '⏳ 登录中...';
+
+        fetch(API_BASE + '/user/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ username, password })
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (loading) loading.textContent = '';
+                console.log('登录结果:', data);
+                if (data.code === 200 && data.data) {
+                    localStorage.setItem('currentUser', JSON.stringify(data.data));
+                    const role = data.data.role;
+                    if (role === 'student') {
+                        window.location.href = 'student.html';
+                    } else {
+                        window.location.href = 'index.html';
+                    }
+                } else {
+                    showError(data.msg || '用户名或密码错误');
+                }
+            })
+            .catch(err => {
+                if (loading) loading.textContent = '';
+                console.error('登录错误:', err);
+                showError('后端服务未启动，请先启动后端！');
+            });
+    }
+
+    // ========== 注册 ==========
+    function doRegister() {
+        const username = document.getElementById('regUsername').value;
+        const password = document.getElementById('regPassword').value;
+        const realName = document.getElementById('regRealName').value;
+        const studentId = document.getElementById('regStudentId').value;
+        const phone = document.getElementById('regPhone').value;
+        const email = document.getElementById('regEmail').value;
+        const role = document.getElementById('regRole').value;
+
+        hideMessages();
+
+        if (!username || username.length < 3) {
+            showError('用户名至少3个字符');
+            return;
+        }
+        if (!password || password.length < 6) {
+            showError('密码至少6位');
+            return;
+        }
+        if (!realName) {
+            showError('请输入真实姓名');
+            return;
+        }
+        if (role === 'student' && !studentId) {
+            showError('学生请填写学号');
+            return;
+        }
+
+        const loading = document.getElementById('registerLoading');
+        if (loading) loading.textContent = '⏳ 注册中...';
+
+        const userData = { username, password, realName, studentId, phone, email, role };
+
+        fetch(API_BASE + '/user/register', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(userData)
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (loading) loading.textContent = '';
+                console.log('注册结果:', data);
+                if (data.code === 200) {
+                    showSuccess('🎉 注册成功！请登录');
+                    document.getElementById('regUsername').value = '';
+                    document.getElementById('regPassword').value = '';
+                    document.getElementById('regRealName').value = '';
+                    document.getElementById('regStudentId').value = '';
+                    document.getElementById('regPhone').value = '';
+                    document.getElementById('regEmail').value = '';
+                    setTimeout(() => {
+                        showLogin();
+                        document.getElementById('loginUsername').value = username;
+                    }, 2000);
+                } else {
+                    showError(data.msg || '注册失败');
+                }
+            })
+            .catch(err => {
+                if (loading) loading.textContent = '';
+                console.error('注册错误:', err);
+                showError('后端服务未启动，请先启动后端！');
+            });
+    }
+
+    // ========== 回车键支持 ==========
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') {
+            if (!document.getElementById('loginForm').classList.contains('hidden')) {
+                doLogin();
+            } else {
+                doRegister();
+            }
+        }
+    });
+
+    // ========== 页面加载时检测登录状态和语言偏好 ==========
+    document.addEventListener('DOMContentLoaded', function() {
+        const savedLang = localStorage.getItem('lang') || 'zh_CN';
+        switchLang(savedLang);
+
+        const userStr = localStorage.getItem('currentUser');
+        if (userStr) {
+            try {
+                const user = JSON.parse(userStr);
+                if (user.role === 'student') {
+                    window.location.href = 'student.html';
+                } else {
+                    window.location.href = 'index.html';
+                }
+            } catch(e) {}
+        }
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>新增稿件 - 发布稿件</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Microsoft YaHei', sans-serif; background: #f0f2f5; padding: 20px; }
+        .header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 15px 30px; border-radius: 8px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+        .header a { color: white; text-decoration: none; background: rgba(255,255,255,0.2); padding: 5px 15px; border-radius: 4px; }
+        .card { background: white; border-radius: 8px; padding: 30px; max-width: 700px; margin: 0 auto; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+        .card-title { font-size: 18px; font-weight: bold; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 2px solid #667eea; text-align: center; }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; font-weight: bold; margin-bottom: 5px; color: #333; }
+        .form-group input, .form-group textarea, .form-group select { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; }
+        .form-group textarea { min-height: 150px; resize: vertical; }
+        .btn { padding: 10px 30px; border: none; border-radius: 4px; cursor: pointer; font-size: 14px; }
+        .btn-success { background: #28a745; color: white; }
+        .btn-primary { background: #667eea; color: white; }
+        .btn-group { display: flex; gap: 10px; justify-content: center; }
+        .back-btn { display: block; text-align: center; margin-top: 20px; color: #667eea; text-decoration: none; }
+    </style>
+</head>
+<body>
+<div class="header">
+    <div>➕ 新增稿件（addArticle.html）</div>
+    <div>
+        <a href="allArticle.html">📋 返回列表</a>
+        <a href="../index.html" style="margin-left:10px;">🏠 首页</a>
+    </div>
+</div>
+<div class="card">
+    <div class="card-title">📝 发布新稿件</div>
+    <div class="form-group">
+        <label>📌 稿件标题</label>
+        <input type="text" placeholder="请输入稿件标题">
+    </div>
+    <div class="form-group">
+        <label>🏷️ 稿件类型</label>
+        <select>
+            <option value="news">新闻稿</option>
+            <option value="story" selected>故事随笔</option>
+            <option value="poem">诗歌散文</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label>👤 作者</label>
+        <input type="text" placeholder="请输入作者姓名" value="张三">
+    </div>
+    <div class="form-group">
+        <label>📄 稿件内容</label>
+        <textarea placeholder="请在这里输入稿件内容...">青春是一首诗，我们在广软的校园里书写着属于自己的篇章。广播站是连接你我他的桥梁，让我们一起用声音传递温暖，用文字记录美好。</textarea>
+    </div>
+    <div class="btn-group">
+        <button class="btn btn-success" onclick="alert('稿件发布成功！')">📮 发布稿件</button>
+        <button class="btn btn-primary" onclick="alert('已保存草稿！')">💾 保存草稿</button>
+    </div>
+    <a href="allArticle.html" class="back-btn">← 返回稿件列表</a>
+</div>
+</body>
+</html>

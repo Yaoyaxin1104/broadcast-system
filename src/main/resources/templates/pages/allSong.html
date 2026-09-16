@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>点歌管理 - 全部点歌</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Microsoft YaHei', sans-serif; background: #f0f2f5; padding: 20px; }
+        .header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 15px 30px; border-radius: 8px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+        .header a { color: white; text-decoration: none; background: rgba(255,255,255,0.2); padding: 5px 15px; border-radius: 4px; }
+        .card { background: white; border-radius: 8px; padding: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+        .card-title { font-size: 18px; font-weight: bold; margin-bottom: 15px; padding-bottom: 10px; border-bottom: 2px solid #667eea; }
+        .search-bar { display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; }
+        .search-bar input, .search-bar select { padding: 8px 12px; border: 1px solid #ddd; border-radius: 4px; }
+        .search-bar button { padding: 8px 20px; border: none; border-radius: 4px; cursor: pointer; }
+        .btn-primary { background: #667eea; color: white; }
+        .btn-success { background: #28a745; color: white; }
+        .btn-danger { background: #dc3545; color: white; }
+        .btn-warning { background: #ffc107; color: #333; }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { padding: 12px; text-align: left; border-bottom: 1px solid #eee; }
+        th { background: #f8f9fa; }
+        .status { padding: 4px 12px; border-radius: 20px; font-size: 12px; }
+        .status-pending { background: #fff3cd; color: #856404; }
+        .status-approved { background: #d4edda; color: #155724; }
+        .status-rejected { background: #f8d7da; color: #721c24; }
+        .back-btn { display: inline-block; margin-top: 20px; color: #667eea; text-decoration: none; }
+    </style>
+</head>
+<body>
+<div class="header">
+    <div>🎵 点歌管理</div>
+    <div>
+        <a href="searchSong.html">🔍 查询</a>
+        <a href="../index.html" style="margin-left:10px;">🏠 返回首页</a>
+    </div>
+</div>
+<div class="card">
+    <div class="card-title">📋 全部点歌列表（allSong.html）</div>
+    <div class="search-bar">
+        <input type="text" placeholder="搜索歌曲名称">
+        <select>
+            <option>全部状态</option>
+            <option>待审核</option>
+            <option>已通过</option>
+            <option>已拒绝</option>
+        </select>
+        <button class="btn-primary">搜索</button>
+        <button class="btn-success" onclick="alert('新增点歌页面')">+ 新增</button>
+    </div>
+    <table>
+        <thead>
+        <tr><th>ID</th><th>歌曲名称</th><th>歌手</th><th>申请人</th><th>状态</th><th>申请时间</th><th>操作</th></tr>
+        </thead>
+        <tbody>
+        <tr><td>1</td><td>夜曲</td><td>周杰伦</td><td>张三</td><td><span class="status status-pending">待审核</span></td><td>2026-06-27 10:00</td><td><button class="btn-success" onclick="location.href='auditSong.html?id=1'">审核</button> <button class="btn-danger">删除</button></td></tr>
+        <tr><td>2</td><td>稻香</td><td>周杰伦</td><td>李四</td><td><span class="status status-approved">已通过</span></td><td>2026-06-26 15:30</td><td><button class="btn-success" onclick="location.href='auditSong.html?id=2'">审核</button> <button class="btn-danger">删除</button></td></tr>
+        <tr><td>3</td><td>起风了</td><td>买辣椒也用券</td><td>王五</td><td><span class="status status-pending">待审核</span></td><td>2026-06-26 09:20</td><td><button class="btn-success" onclick="location.href='auditSong.html?id=3'">审核</button> <button class="btn-danger">删除</button></td></tr>
+        <tr><td>4</td><td>晴天</td><td>周杰伦</td><td>赵六</td><td><span class="status status-rejected">已拒绝</span></td><td>2026-06-25 14:00</td><td><button class="btn-success" onclick="location.href='auditSong.html?id=4'">审核</button> <button class="btn-danger">删除</button></td></tr>
+        </tbody>
+    </table>
+    <a href="../index.html" class="back-btn">← 返回首页</a>
+</div>
+</body>
+</html>

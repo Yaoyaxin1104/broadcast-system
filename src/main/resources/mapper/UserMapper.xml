@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.grbroadcast.dao.UserMapper">
+
+    <!-- 通用结果映射 -->
+    <resultMap id="BaseResultMap" type="com.grbroadcast.entity.User">
+        <id column="id" property="id"/>
+        <result column="username" property="username"/>
+        <result column="password" property="password"/>
+        <result column="real_name" property="realName"/>
+        <result column="student_id" property="studentId"/>
+        <result column="role" property="role"/>
+        <result column="phone" property="phone"/>
+        <result column="email" property="email"/>
+        <result column="status" property="status"/>
+        <result column="create_time" property="createTime"/>
+    </resultMap>
+
+    <!-- 根据用户名查询用户 -->
+    <select id="findByUsername" resultMap="BaseResultMap">
+        SELECT * FROM `user` WHERE username = #{username}
+    </select>
+
+    <!-- 根据角色查询用户列表 -->
+    <select id="findByRole" resultMap="BaseResultMap">
+        SELECT * FROM `user` WHERE role = #{role} AND status = 1
+    </select>
+
+    <!-- 查询所有学生 -->
+    <select id="findAllStudents" resultMap="BaseResultMap">
+        SELECT * FROM `user` WHERE role = 'student' ORDER BY create_time DESC
+    </select>
+
+    <!-- 更新用户状态 -->
+    <update id="updateStatus">
+        UPDATE `user` SET status = #{status} WHERE id = #{id}
+    </update>
+</mapper>

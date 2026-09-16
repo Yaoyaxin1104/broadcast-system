@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>稿件查询 - 查询稿件</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Microsoft YaHei', sans-serif; background: #f0f2f5; padding: 20px; }
+        .header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 15px 30px; border-radius: 8px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+        .header a { color: white; text-decoration: none; background: rgba(255,255,255,0.2); padding: 5px 15px; border-radius: 4px; }
+        .card { background: white; border-radius: 8px; padding: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+        .card-title { font-size: 18px; font-weight: bold; margin-bottom: 15px; padding-bottom: 10px; border-bottom: 2px solid #667eea; }
+        .search-form { background: #f8f9fa; padding: 20px; border-radius: 8px; margin-bottom: 20px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; }
+        .search-form label { font-weight: bold; display: block; margin-bottom: 5px; }
+        .search-form input, .search-form select { width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px; }
+        .search-form .btn-row { grid-column: 1 / -1; text-align: center; }
+        .btn { padding: 8px 30px; border: none; border-radius: 4px; cursor: pointer; }
+        .btn-primary { background: #667eea; color: white; }
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        th, td { padding: 10px; text-align: left; border-bottom: 1px solid #eee; }
+        th { background: #f8f9fa; }
+        .status { padding: 4px 12px; border-radius: 20px; font-size: 12px; }
+        .status-pending { background: #fff3cd; color: #856404; }
+        .status-approved { background: #d4edda; color: #155724; }
+        .status-rejected { background: #f8d7da; color: #721c24; }
+        .back-btn { display: inline-block; margin-top: 20px; color: #667eea; text-decoration: none; }
+    </style>
+</head>
+<body>
+<div class="header">
+    <div>🔍 稿件查询（searchArticle.html）</div>
+    <div>
+        <a href="allArticle.html">📋 全部稿件</a>
+        <a href="addArticle.html">➕ 新增</a>
+        <a href="../index.html" style="margin-left:10px;">🏠 首页</a>
+    </div>
+</div>
+<div class="card">
+    <div class="card-title">🔍 查询条件</div>
+    <div class="search-form">
+        <div>
+            <label>标题</label>
+            <input type="text" placeholder="请输入标题关键词">
+        </div>
+        <div>
+            <label>类型</label>
+            <select>
+                <option value="">全部</option>
+                <option value="news">新闻稿</option>
+                <option value="story">故事随笔</option>
+                <option value="poem">诗歌散文</option>
+            </select>
+        </div>
+        <div>
+            <label>状态</label>
+            <select>
+                <option value="">全部</option>
+                <option value="pending">待审核</option>
+                <option value="approved">已通过</option>
+                <option value="rejected">已拒绝</option>
+            </select>
+        </div>
+        <div>
+            <label>作者</label>
+            <input type="text" placeholder="请输入作者">
+        </div>
+        <div>
+            <label>开始日期</label>
+            <input type="date">
+        </div>
+        <div>
+            <label>结束日期</label>
+            <input type="date">
+        </div>
+        <div class="btn-row">
+            <button class="btn btn-primary" onclick="alert('查询完成！')">🔍 查询</button>
+            <button class="btn btn-primary" style="background:#6c757d;" onclick="alert('已重置！')">🔄 重置</button>
+        </div>
+    </div>
+</div>
+<div class="card" style="margin-top:20px;">
+    <div class="card-title">📋 查询结果</div>
+    <p style="color:#999;margin-bottom:10px;">共找到 <strong>2</strong> 条稿件</p>
+    <table>
+        <thead>
+        <tr><th>ID</th><th>标题</th><th>类型</th><th>作者</th><th>状态</th><th>投稿时间</th><th>操作</th></tr>
+        </thead>
+        <tbody>
+        <tr><td>1</td><td>青春飞扬，梦想起航</td><td>故事随笔</td><td>张三</td><td><span class="status status-pending">待审核</span></td><td>2026-06-27</td><td><button class="btn btn-success" style="padding:4px 10px;font-size:12px;">查看</button></td></tr>
+        <tr><td>3</td><td>毕业季的青春回忆</td><td>诗歌散文</td><td>王五</td><td><span class="status status-pending">待审核</span></td><td>2026-06-25</td><td><button class="btn btn-success" style="padding:4px 10px;font-size:12px;">查看</button></td></tr>
+        </tbody>
+    </table>
+    <a href="allArticle.html" class="back-btn">← 返回全部稿件</a>
+</div>
+</body>
+</html>
