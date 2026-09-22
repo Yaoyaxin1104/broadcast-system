@@ -1,0 +1,12 @@
+# Dimension 6: media and embedded objects
+source: F:\实验3 数据库设计与数据库操作.docx
+syntax: [OBJECT<n>] identifies a package object, [REL<n>] a reference, and [ANCHOR<n>] its source Run.
+omitted: record_type; Run formatting and raw Run XML, which belong to dimension 4.
+normalized: drawing OOXML uses compact prefix:tag(attribute,child) notation.
+
+[OBJECT1 part="word/media/image1.png" kind="media" type="image/png" size=52196 sha256="fd6f7a704b123e7221ac103d15d18beac8d0ee09132a167115b391a8af706773" relationship_ids=["rId6"]]
+[REL1 part="word/document.xml" id="rId6" type="image"]
+
+[ANCHOR1 part="word/document.xml" paragraph=1 run=1 section=1 loc="/w:document/w:body/w:p[1]/w:r[1]"]
+[DRAWING1 relationship_id="rId6" relationship_ids=["rId6"] target="media/image1.png" resolved_target="word/media/image1.png" targets=[{"relationship_id":"rId6","target":"media/image1.png","resolved_target":"word/media/image1.png","target_mode":null}] name="图片 2" alt_text="广州软件学院LOGO横排" size_emu={"cx":"5480685","cy":"1655445"} positioning="wp:inline" location="/w:document/w:body/w:p[1]/w:r[1]/w:drawing"]
+structure=w:drawing(wp:inline(distT="0",distB="0",distL="114300",distR="114300",wp:extent(cx="5480685",cy="1655445"),wp:effectExtent(l="0",t="0",r="5715",b="1905"),wp:docPr(id="2",name="图片 2",descr="广州软件学院LOGO横排"),wp:cNvGraphicFramePr(a:graphicFrameLocks(noChangeAspect="1")),a:graphic(a:graphicData(uri="http://schemas.openxmlformats.org/drawingml/2006/picture",pic:pic(pic:nvPicPr(pic:cNvPr(id="2",name="图片 2",descr="广州软件学院LOGO横排"),pic:cNvPicPr(a:picLocks(noChangeAspect="1"))),pic:blipFill(a:blip(r:embed="rId6"),a:stretch(a:fillRect())),pic:spPr(a:xfrm(a:off(x="0",y="0"),a:ext(cx="5480685",cy="1655445")),a:prstGeom(prst="rect",a:avLst())))))))

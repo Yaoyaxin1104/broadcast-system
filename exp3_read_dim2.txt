@@ -1,0 +1,622 @@
+# Dimension 2: paragraph layout
+source: F:\实验3 数据库设计与数据库操作.docx
+location_base: /word/document.xml/w:body/
+syntax: [P<n> ...] starts a paragraph; listed defaults apply when omitted; other missing attributes are unset/inherited; null overrides a default with unset/inherited.
+defaults: align="left", keep_lines=false, keep_next=false, page_break=false, part="word/document.xml", widow=true
+definitions: @v1 indent={"firstLine":"0","firstLineChars":"0"}; @v2 indent={"left":"0","leftChars":"0","firstLine":"0","firstLineChars":"0"}; @v3 spacing={"line":"360","lineRule":"auto"}; @v4 spacing={"line":"460","lineRule":"exact"}; @v5 indent={"left":"-89","leftChars":"-294","right":"-838","rightChars":"-349","hanging":"617","hangingChars":"343"}; @v6 indent={"left":"391","leftChars":"-79","right":"-838","rightChars":"-349","hanging":"581","hangingChars":"193"}; @v7 numbering={"num_id":"0","level":"0"}; @v8 indent={"left":"425","leftChars":"0","hanging":"425","firstLineChars":"0"}; @v9 numbering={"num_id":"1","level":"0"}; @v10 numbering={"num_id":"2","level":"0"}; @v11 numbering={"num_id":"3","level":"0"}; @v12 indent={"left":"0","leftChars":"0","right":"0","firstLine":"0","firstLineChars":"0"}; @v13 spacing={"before":"0","beforeAutospacing":"0","after":"0","afterAutospacing":"0","line":"460","lineRule":"exact"}; @v14 indent={"left":"0","leftChars":"0","right":"0","firstLine":"420","firstLineChars":"0"}; @v15 spacing={"line":"300","lineRule":"atLeast"}; @v16 indent={"left":"0","firstLine":"0","firstLineChars":"0"}; @v17 spacing={"beforeAutospacing":"0","afterAutospacing":"0","line":"460","lineRule":"exact"}; @v18 indent={"left":"0","right":"0","firstLine":"0","firstLineChars":"0"}; @v19 shading={"val":"clear","fill":"FFFFFF"}
+text_policy: full text is emitted without truncation.
+omitted: record_type=paragraph; repeated default values; xpath because it equals location; raw XML.
+normalized: loc is body[/row/cell/block] indexes relative to location_base; @v references definitions; line_spacing duplicates spacing.line; border XML is losslessly compacted by tag and attributes.
+
+[P1 section=1 loc=1 indent=@v1 spacing={"line":"240","lineRule":"auto"} special=[{"tag":"w:drawing","location":"/w:document/w:body/w:p[1]/w:r[1]/w:drawing"},{"tag":"w:bookmarkStart","attrs":{"w:id":"0","w:name":"_Toc3566285"},"location":"/w:document/w:body/w:p[1]/w:bookmarkStart"}] align=null keep_lines=null widow=null keep_next=null page_break=null]
+                                                  
+
+[P2 section=1 loc=2 align="right" keep_lines=null widow=null keep_next=null page_break=null]
+实验报告封面
+
+[P3 section=1 loc=3 indent=@v2 align=null keep_lines=null widow=null keep_next=null page_break=null]
+课程名称：    Web应用项目实训     课程代码： CW3104      
+
+[P4 section=1 loc=4 indent=@v2 spacing=@v3 align=null keep_lines=null widow=null keep_next=null page_break=null]
+任课老师：    包玉琳              实验指导老师: 包玉琳    
+
+[P5 section=1 loc=5 indent=@v2 spacing=@v3 align=null keep_lines=null widow=null keep_next=null page_break=null]
+实验报告名称： 实验3 数据库设计与数据库操作     
+
+[P6 section=1 table=1 row=1 cell=1 loc=6/1/1/2 spacing=@v4 keep_lines=null widow=null keep_next=null page_break=null]
+本实验报告包括以下几个内容：
+
+[P7 section=1 table=1 row=1 cell=1 loc=6/1/1/3 spacing=@v4 keep_lines=null widow=null keep_next=null page_break=null]
+一、实验目的              □
+
+[P8 section=1 table=1 row=1 cell=1 loc=6/1/1/4 spacing=@v4 keep_lines=null widow=null keep_next=null page_break=null]
+二、实验环境              □
+
+[P9 section=1 table=1 row=1 cell=1 loc=6/1/1/5 spacing=@v4 keep_lines=null widow=null keep_next=null page_break=null]
+三、实验准备              □
+
+[P10 section=1 table=1 row=1 cell=1 loc=6/1/1/6 spacing=@v4 keep_lines=null widow=null keep_next=null page_break=null]
+四、实验过程              □
+
+[P11 section=1 loc=7 align="right" keep_lines=null widow=null keep_next=null page_break=null]
+学生姓名：                     
+
+[P12 section=1 loc=8 align="right" keep_lines=null widow=null keep_next=null page_break=null]
+      学号：                     
+
+[P13 section=1 loc=9 align="right" keep_lines=null widow=null keep_next=null page_break=null]
+          教学班：                      
+
+[P14 section=1 loc=10 align="right" keep_lines=null widow=null keep_next=null page_break=null]
+      递交日期：                      
+
+[P15 section=1 loc=11 align="right" indent={"firstLine":"1120","firstLineChars":"400"} keep_lines=null widow=null keep_next=null page_break=null]
+签收人：                      
+
+[P16 section=1 loc=12 indent=@v5 align=null keep_lines=null widow=null keep_next=null page_break=null]
+我申明，本报告内的实验已按要求完成，报告完全是由我个人完成，并没有抄袭行为。我已经保留了这份实验报告的副本。                                                                  
+
+[P17 section=1 loc=13 indent=@v5 align=null keep_lines=null widow=null keep_next=null page_break=null]
+                                                                    申明人(签名):
+
+[P18 section=1 loc=14 indent=@v6 align=null keep_lines=null widow=null keep_next=null page_break=null]
+<empty/>
+
+[P19 section=1 loc=15 indent=@v6 align=null keep_lines=null widow=null keep_next=null page_break=null]
+实验报告评语与评分：
+
+[P20 section=1 loc=16 indent=@v6 align=null keep_lines=null widow=null keep_next=null page_break=null]
+<empty/>
+
+[P21 section=1 loc=17 indent=@v6 align=null keep_lines=null widow=null keep_next=null page_break=null]
+评阅老师签名：
+
+[P22 section=1 loc=18 align=null keep_lines=null widow=null keep_next=null page_break=null]
+
+
+
+[P23 section=1 loc=20 numbering=@v7 align=null keep_lines=null widow=null keep_next=null page_break=null]
+一、实验目的
+
+[P24 section=1 loc=21 indent=@v8 numbering=@v9 align=null keep_lines=null widow=null keep_next=null page_break=null]
+能够理解Web项目数据库设计的重要性，识别超卖、字段修改故障、消费记录对账异常等数据库设计缺陷带来的代价。
+
+[P25 section=1 loc=22 indent=@v8 numbering=@v9 align=null keep_lines=null widow=null keep_next=null page_break=null]
+能够运用数据库设计六阶段：需求分析、概念结构设计、逻辑结构设计、物理结构设计、数据库实施、运行与维护。
+
+[P26 section=1 loc=23 indent=@v8 numbering=@v9 align=null keep_lines=null widow=null keep_next=null page_break=null]
+能够绘制E-R图，正确判断1:1、1:N、M:N关系，并将M:N关系拆分为中间表。
+
+[P27 section=1 loc=24 indent=@v8 numbering=@v9 align=null keep_lines=null widow=null keep_next=null page_break=null]
+能够依据1NF、2NF、3NF进行范式审查，识别冗余字段、部分依赖和传递依赖。
+
+[P28 section=1 loc=25 indent=@v8 numbering=@v9 align=null keep_lines=null widow=null keep_next=null page_break=null]
+能够遵循数据库命名规范，完成表名、字段名、主键、外键、索引和约束设计。
+
+[P29 section=1 loc=26 indent=@v8 numbering=@v9 align=null keep_lines=null widow=null keep_next=null page_break=null]
+能够使用AI生成E-R草稿、建表DDL、范式审查、命名检查、索引与约束优化建议，并进行人工定稿。
+
+[P30 section=1 loc=27 indent=@v8 numbering=@v9 align=null keep_lines=null widow=null keep_next=null page_break=null]
+能够完成Spring Boot + MySQL + MyBatis-Plus + Druid数据库连接配置，开启Druid监控。
+
+[P31 section=1 loc=28 indent=@v8 numbering=@v9 align=null keep_lines=null widow=null keep_next=null page_break=null]
+能够设计POJO、PO、VO、DTO、BO、DO等实体模型，完成Controller—Service—Mapper之间的数据流转。
+
+[P32 section=1 loc=29 indent=@v8 numbering=@v9 align=null keep_lines=null widow=null keep_next=null page_break=null]
+能够设计统一返回结构Result、错误码枚举、自定义异常和全局异常处理等通用类。
+
+[P33 section=1 loc=30 indent=@v8 numbering=@v9 align=null keep_lines=null widow=null keep_next=null page_break=null]
+能够通过Druid监控捕获慢SQL，使用EXPLAIN验证索引优化效果。
+
+[P34 section=1 loc=31 numbering=@v7 align=null keep_lines=null widow=null keep_next=null page_break=null]
+二、实验环境
+
+[P35 section=1 loc=32 indent=@v8 numbering=@v10 align=null keep_lines=null widow=null keep_next=null page_break=null]
+操作系统：Windows 10/11 或 macOS 或 Linux
+
+[P36 section=1 loc=33 indent=@v8 numbering=@v10 align=null keep_lines=null widow=null keep_next=null page_break=null]
+开发工具：IntelliJ IDEA 2023 及以上版本
+
+[P37 section=1 loc=34 indent=@v8 numbering=@v10 align=null keep_lines=null widow=null keep_next=null page_break=null]
+JDK版本：JDK 18+
+
+[P38 section=1 loc=35 indent=@v8 numbering=@v10 align=null keep_lines=null widow=null keep_next=null page_break=null]
+构建工具：Maven 3.8+
+
+[P39 section=1 loc=36 indent=@v8 numbering=@v10 align=null keep_lines=null widow=null keep_next=null page_break=null]
+版本管理：Git 2.42.0 + Gitee远程仓库
+
+[P40 section=1 loc=37 indent=@v8 numbering=@v10 align=null keep_lines=null widow=null keep_next=null page_break=null]
+数据库：MySQL 8.0+
+
+[P41 section=1 loc=38 indent=@v8 numbering=@v10 align=null keep_lines=null widow=null keep_next=null page_break=null]
+数据库客户端：Navicat 或 DBeaver
+
+[P42 section=1 loc=39 indent=@v8 numbering=@v10 align=null keep_lines=null widow=null keep_next=null page_break=null]
+核心依赖：Spring Boot、MyBatis-Plus、Druid、MySQL Driver、Lombok
+
+[P43 section=1 loc=40 indent=@v8 numbering=@v10 align=null keep_lines=null widow=null keep_next=null page_break=null]
+AI工具：通义灵码、CodeGeeX、通义千问、Claude、ChatGPT等任选
+
+[P44 section=1 loc=41 numbering=@v7 align=null keep_lines=null widow=null keep_next=null page_break=null]
+三、实验准备
+
+[P45 section=1 loc=42 indent=@v8 numbering=@v11 align=null keep_lines=null widow=null keep_next=null page_break=null]
+已配置好JDK、Maven、IDEA开发环境。
+
+[P46 section=1 loc=43 indent=@v8 numbering=@v11 align=null keep_lines=null widow=null keep_next=null page_break=null]
+已安装MySQL 8.0+，并创建可用的数据库账号和密码。
+
+[P47 section=1 loc=44 indent=@v8 numbering=@v11 align=null keep_lines=null widow=null keep_next=null page_break=null]
+已准备课程设计项目的需求分析文档或业务描述。
+
+[P48 section=1 loc=45 indent=@v8 numbering=@v11 align=null keep_lines=null widow=null keep_next=null page_break=null]
+已创建Gitee远程仓库，并配置本地Git全局用户名和邮箱。
+
+[P49 section=1 loc=46 indent=@v8 numbering=@v11 align=null keep_lines=null widow=null keep_next=null page_break=null]
+已在父模块pom.xml中完成依赖版本管理，能够引入MyBatis-Plus、Druid、MySQL驱动等依赖。
+
+[P50 section=1 loc=47 indent={"leftChars":"0"} numbering=@v7 align=null keep_lines=null widow=null keep_next=null page_break=null]
+四、实验过程
+
+[P51 section=1 loc=48 style="6" indent=@v12 spacing=@v13]
+任务一：数据库设计六阶段与AI产出审查
+
+[P52 section=1 loc=49 style="6" indent=@v12 spacing=@v13]
+步骤1：需求分析
+
+[P53 section=1 loc=50 style="6" indent=@v12 spacing=@v13]
+根据课程设计项目，整理业务需求，形成需求文档与数据需求清单。例如在线课程学习业务：
+
+[P54 section=1 loc=51 style="6" indent=@v12 spacing=@v13]
+一名用户可以下多笔订单，一笔订单只属于一名用户。
+
+[P55 section=1 loc=52 style="6" indent=@v12 spacing=@v13]
+一笔订单可以包含多条订单明细。
+
+[P56 section=1 loc=53 style="6" indent=@v12 spacing=@v13]
+一门课程可以出现在多条订单明细中。
+
+[P57 section=1 loc=54 style="6" indent=@v12 spacing=@v13]
+用户与课程之间通过“订单明细”建立多对多联系。
+
+[P58 section=1 loc=55 style="6" indent=@v12 spacing=@v13]
+产出：需求文档、数据需求清单。
+
+[P59 section=1 loc=56 style="6" indent=@v12 spacing=@v13]
+<empty/>
+
+[P60 section=1 loc=57 style="6" indent=@v12 spacing=@v13]
+<empty/>
+
+[P61 section=1 loc=58 style="6" indent=@v12 spacing=@v13]
+<empty/>
+
+[P62 section=1 loc=59 style="6" indent=@v12 spacing=@v13]
+<empty/>
+
+[P63 section=1 loc=60 style="6" indent=@v12 spacing=@v13]
+<empty/>
+
+[P64 section=1 loc=61 style="6" indent=@v12 spacing=@v13]
+<empty/>
+
+[P65 section=1 loc=62 style="6" indent=@v12 spacing=@v13]
+步骤2：概念结构设计
+
+[P66 section=1 loc=63 style="6" indent=@v12 spacing=@v13]
+使用AI生成实体关系初稿，提示词示例：
+
+[P67 section=1 loc=64 style="6" indent=@v14 spacing=@v13]
+你是资深数据库架构师。请根据以下业务需求输出：1）实体清单及关键属性，标注主键候选；2）实体间关系及基数（1:1/1:N/M:N）；3）指出需要拆分为中间表的M:N关系。需求：<粘贴项目业务描述>
+
+[P68 section=1 loc=65 style="6" indent=@v12 spacing=@v13]
+人工审查重点：
+
+[P69 section=1 loc=66 style="6" indent=@v12 spacing=@v13]
+关系基数是否正确，AI是否把1:N误判为1:1。
+
+[P70 section=1 loc=67 style="6" indent=@v12 spacing=@v13]
+M:N是否拆出中间表。
+
+[P71 section=1 loc=68 style="6" indent=@v12 spacing=@v13]
+实体命名是否用名词，关系命名是否用动词短语。
+
+[P72 section=1 loc=69 style="6" indent=@v12 spacing=@v13]
+是否遗漏关键属性。
+
+[P73 section=1 loc=70 style="6" indent=@v12 spacing=@v13]
+绘制E-R图。使用陈氏E-R图。示例关系：
+
+[P74 section=1 loc=71 style="6" indent=@v12 spacing=@v13]
+用户 1—N 订单
+
+[P75 section=1 loc=72 style="6" indent=@v12 spacing=@v13]
+订单 1—N 订单明细
+
+[P76 section=1 loc=73 style="6" indent=@v12 spacing=@v13]
+课程 1—N 订单明细
+
+[P77 section=1 loc=74 style="6" indent=@v12 spacing=@v13]
+截图：
+
+[P78 section=1 loc=75 style="6" indent=@v12 spacing=@v13]
+<empty/>
+
+[P79 section=1 loc=76 style="6" indent=@v12 spacing=@v13]
+<empty/>
+
+[P80 section=1 loc=77 style="6" indent=@v12 spacing=@v13]
+<empty/>
+
+[P81 section=1 loc=78 style="6" indent=@v12 spacing=@v13]
+<empty/>
+
+[P82 section=1 loc=79 style="6" indent=@v12 spacing=@v13]
+步骤3：逻辑结构设计
+
+[P83 section=1 loc=80 style="6" indent=@v12 spacing=@v13]
+将概念模型转换为关系模式，形成表名、字段、主键、外键。示例：
+
+[P84 section=1 table=2 row=1 cell=1 loc=81/1/1/2 indent=@v1 spacing=@v15]
+表名
+
+[P85 section=1 table=2 row=1 cell=2 loc=81/1/2/2 indent=@v1 spacing=@v15]
+字段举例
+
+[P86 section=1 table=2 row=1 cell=3 loc=81/1/3/2 indent=@v1 spacing=@v15]
+主键
+
+[P87 section=1 table=2 row=1 cell=4 loc=81/1/4/2 indent=@v1 spacing=@v15]
+外键
+
+[P88 section=1 table=2 row=2 cell=1 loc=81/2/1/2 indent=@v1 spacing=@v15]
+用户表
+
+[P89 section=1 table=2 row=2 cell=2 loc=81/2/2/2 indent=@v1 spacing=@v15]
+user_id、name、phone、create_time
+
+[P90 section=1 table=2 row=2 cell=3 loc=81/2/3/2 indent=@v1 spacing=@v15]
+user_id
+
+[P91 section=1 table=2 row=2 cell=4 loc=81/2/4/2 indent=@v1 spacing=@v15]
+无
+
+[P92 section=1 table=2 row=3 cell=1 loc=81/3/1/2 indent=@v1 spacing=@v15]
+课程表
+
+[P93 section=1 table=2 row=3 cell=2 loc=81/3/2/2 indent=@v1 spacing=@v15]
+course_id、course_name、price、teacher
+
+[P94 section=1 table=2 row=3 cell=3 loc=81/3/3/2 indent=@v1 spacing=@v15]
+course_id
+
+[P95 section=1 table=2 row=3 cell=4 loc=81/3/4/2 indent=@v1 spacing=@v15]
+无
+
+[P96 section=1 table=2 row=4 cell=1 loc=81/4/1/2 indent=@v1 spacing=@v15]
+订单表
+
+[P97 section=1 table=2 row=4 cell=2 loc=81/4/2/2 indent=@v1 spacing=@v15]
+order_id、user_id、order_time
+
+[P98 section=1 table=2 row=4 cell=3 loc=81/4/3/2 indent=@v1 spacing=@v15]
+order_id
+
+[P99 section=1 table=2 row=4 cell=4 loc=81/4/4/2 indent=@v1 spacing=@v15]
+user_id
+
+[P100 section=1 table=2 row=5 cell=1 loc=81/5/1/2 indent=@v1 spacing=@v15]
+订单明细表
+
+[P101 section=1 table=2 row=5 cell=2 loc=81/5/2/2 indent=@v1 spacing=@v15]
+item_id、order_id、course_id
+
+[P102 section=1 table=2 row=5 cell=3 loc=81/5/3/2 indent=@v1 spacing=@v15]
+item_id
+
+[P103 section=1 table=2 row=5 cell=4 loc=81/5/4/2 indent=@v1 spacing=@v15]
+order_id、course_id
+
+[P104 section=1 loc=82 style="6" indent=@v12 spacing=@v13]
+使用AI进行范式审查，提示词示例：
+
+[P105 section=1 loc=83 style="6" indent=@v14 spacing=@v13]
+请检查以下MySQL建表语句是否满足第三范式（3NF）。逐表说明：1）是否满足1NF；2）是否满足2NF；3）是否满足3NF；4）若存在冗余或更新异常，请指出具体字段并给出修改后的建表SQL。<粘贴建表DDL>
+
+[P106 section=1 loc=84 style="6" indent=@v12 spacing=@v13]
+人工修改：删除冗余字段，如订单大表中不应重复保存用户名、用户手机号；课程总价可由明细汇总，不应冗余存储。
+
+[P107 section=1 loc=85 style="6" indent=@v12 spacing=@v13]
+截图：
+
+[P108 section=1 loc=86 style="6" indent=@v12 spacing=@v13]
+<empty/>
+
+[P109 section=1 loc=87 style="6" indent=@v12 spacing=@v13]
+<empty/>
+
+[P110 section=1 loc=88 style="6" indent=@v12 spacing=@v13]
+<empty/>
+
+[P111 section=1 loc=89 style="6" indent=@v12 spacing=@v13]
+<empty/>
+
+[P112 section=1 loc=90 style="6" indent=@v12 spacing=@v13]
+<empty/>
+
+[P113 section=1 loc=91 style="6" indent=@v12 spacing=@v13]
+步骤4：物理结构设计与数据库实施
+
+[P114 section=1 loc=92 style="6" indent=@v12 spacing=@v13]
+设计主键、外键、约束、索引，并生成MySQL 8建表DDL。要求：
+
+[P115 section=1 loc=93 style="6" indent=@v12 spacing=@v13]
+引擎：InnoDB
+
+[P116 section=1 loc=94 style="6" indent=@v12 spacing=@v13]
+字符集：utf8mb4
+
+[P117 section=1 loc=95 style="6" indent=@v12 spacing=@v13]
+命名全小写加下划线，单词用单数
+
+[P118 section=1 loc=96 style="6" indent=@v12 spacing=@v13]
+每张表包含字段、类型、主键、外键、必要索引、COMMENT
+
+[P119 section=1 loc=97 style="6" indent=@v12 spacing=@v13]
+M:N关系拆出中间表
+
+[P120 section=1 loc=98 style="6" indent=@v12 spacing=@v13]
+AI提示词示例：
+
+[P121 section=1 loc=99 style="6" indent=@v14 spacing=@v13]
+请把上述E-R模型转换为MySQL 8关系模式，生成建表DDL。要求：引擎InnoDB，字符集utf8mb4；每张表含字段、类型、主键、外键、必要索引、COMMENT；命名全小写加下划线、单词用单数；M:N关系拆出中间表；给出完整可执行脚本。
+
+[P122 section=1 loc=100 style="6" indent=@v12 spacing=@v13]
+在Navicat或命令行中执行DDL，确认能成功建表。插入测试数据。
+
+[P123 section=1 loc=101 style="6" indent=@v12 spacing=@v13]
+截图：
+
+[P124 section=1 loc=102 style="6" indent=@v12 spacing=@v13]
+<empty/>
+
+[P125 section=1 loc=103 style="6" indent=@v12 spacing=@v13]
+<empty/>
+
+[P126 section=1 loc=104 style="6" indent=@v12 spacing=@v13]
+<empty/>
+
+[P127 section=1 loc=105 style="6" indent=@v12 spacing=@v13]
+<empty/>
+
+[P128 section=1 loc=106 style="6" indent=@v12 spacing=@v13]
+<empty/>
+
+[P129 section=1 loc=107 style="6" indent=@v12 spacing=@v13]
+<empty/>
+
+[P130 section=1 loc=108 style="6" indent=@v12 spacing=@v13]
+<empty/>
+
+[P131 section=1 loc=109 style="6" indent=@v12 spacing=@v13]
+<empty/>
+
+[P132 section=1 loc=110 style="6" indent=@v12 spacing=@v13]
+<empty/>
+
+[P133 section=1 loc=111 indent=@v16 spacing=@v17 numbering=@v7]
+任务二：Spring Boot数据库连接与持久层配置
+
+[P134 section=1 loc=112 indent=@v16 spacing=@v17 numbering=@v7]
+步骤1：准备数据库
+
+[P135 section=1 loc=113 indent=@v16 spacing=@v17 numbering=@v7]
+在MySQL中创建数据库，例如library_db，并执行任务一生成的建表SQL。
+
+[P136 section=1 loc=114 indent=@v16 spacing=@v17 numbering=@v7]
+步骤2：配置数据源、MyBatis-Plus与Druid
+
+[P137 section=1 loc=115 indent=@v16 spacing=@v17 numbering=@v7]
+在xxx-admin模块的src/main/resources下配置application-dev.yml：
+
+[P138 section=1 loc=116 indent=@v16 spacing=@v17 numbering=@v7]
+<empty/>
+
+[P139 section=1 loc=117 indent=@v16 spacing=@v17 numbering=@v7]
+<empty/>
+
+[P140 section=1 loc=118 indent=@v16 spacing=@v17 numbering=@v7]
+<empty/>
+
+[P141 section=1 loc=119 indent=@v16 spacing=@v17 numbering=@v7]
+<empty/>
+
+[P142 section=1 loc=120 style="6" indent=@v18 spacing=@v13]
+步骤3：创建持久层代码
+
+[P143 section=1 loc=121 style="6" indent=@v18 spacing=@v13]
+<empty/>
+
+[P144 section=1 loc=122 style="6" indent=@v18 spacing=@v13]
+<empty/>
+
+[P145 section=1 loc=123 style="6" indent=@v18 spacing=@v13]
+<empty/>
+
+[P146 section=1 loc=124 style="6" indent=@v18 spacing=@v13]
+<empty/>
+
+[P147 section=1 loc=125 style="6" indent=@v18 spacing=@v13]
+<empty/>
+
+[P148 section=1 loc=126 style="6" indent=@v18 spacing=@v13]
+<empty/>
+
+[P149 section=1 loc=127 style="6" indent=@v18 spacing=@v13]
+<empty/>
+
+[P150 section=1 loc=128 style="6" indent=@v18 spacing=@v13]
+任务三：Druid数据库监控与慢SQL优化
+
+[P151 section=1 loc=129 style="6" indent=@v18 spacing=@v13]
+启动项目后访问：http://localhost:8080/druid
+
+[P152 section=1 loc=130 style="6" indent=@v18 spacing=@v13]
+输入配置的监控用户名和密码，查看SQL监控、SQL防火墙、Web应用、URL、Session、Spring、JSON API等菜单。截图：
+
+[P153 section=1 loc=131 style="6" indent=@v18 spacing=@v13]
+<empty/>
+
+[P154 section=1 loc=132 style="6" indent=@v18 spacing=@v13]
+<empty/>
+
+[P155 section=1 loc=133 style="6" indent=@v18 spacing=@v13]
+<empty/>
+
+[P156 section=1 loc=134 style="6" indent=@v18 spacing=@v13]
+<empty/>
+
+[P157 section=1 loc=135 style="6" indent=@v18 spacing=@v13]
+<empty/>
+
+[P158 section=1 loc=136 style="6" indent=@v18 spacing=@v13]
+任务四：通用类设计
+
+[P159 section=1 loc=137 style="6" indent=@v18 spacing=@v13]
+统一响应数据格式、错误码枚举、自定义异常、全局通用异常
+
+[P160 section=1 loc=138 style="6" indent=@v18 spacing=@v13 special=[{"tag":"w:bookmarkStart","attrs":{"w:id":"1","w:name":"_GoBack"},"location":"/w:document/w:body/w:p[135]/w:bookmarkStart"},{"tag":"w:bookmarkEnd","attrs":{"w:id":"1"},"location":"/w:document/w:body/w:p[135]/w:bookmarkEnd"}]]
+<empty/>
+
+[P161 section=1 loc=139 style="6" indent=@v18 spacing=@v13]
+<empty/>
+
+[P162 section=1 loc=140 style="6" indent=@v18 spacing=@v13]
+<empty/>
+
+[P163 section=1 loc=141 style="6" indent=@v18 spacing=@v13]
+<empty/>
+
+[P164 section=1 loc=142 style="6" indent=@v18 spacing=@v13]
+<empty/>
+
+[P165 section=1 loc=143 style="6" indent=@v18 spacing=@v13]
+任务五：Git提交与AI使用声明
+
+[P166 section=1 loc=144 style="6" indent=@v18 spacing=@v13]
+在项目根目录执行：
+
+[P167 section=1 loc=145 style="6" indent=@v18 spacing=@v13]
+git add .
+
+[P168 section=1 loc=146 style="6" indent=@v18 spacing=@v13]
+git commit -m "完成数据库设计与数据库操作实验"
+
+[P169 section=1 loc=147 style="6" indent=@v18 spacing=@v13]
+git push -u origin master
+
+[P170 section=1 loc=148 style="6" indent=@v18 spacing=@v13]
+<empty/>
+
+[P171 section=1 loc=149 style="6" indent=@v18 spacing=@v13]
+<empty/>
+
+[P172 section=1 loc=150 style="6" indent=@v18 spacing=@v13]
+<empty/>
+
+[P173 section=1 loc=151 style="6" indent=@v18 spacing=@v13]
+<empty/>
+
+[P174 section=1 loc=152 style="4" indent=@v18 spacing=@v13 shading=@v19]
+任务六：填写AI使用声明表
+
+[P175 section=1 loc=153 style="6" indent=@v18 spacing=@v13 shading=@v19]
+仅填写使用AI辅助产生重要产出的部分，记录一次完整的AI使用过程（从输入Prompt到人工修改完成），以下两种情形需要记录：
+
+[P176 section=1 loc=154 style="6" indent=@v18 spacing=@v13]
+情形A：AI输出的内容经过筛选、修改后纳入了最终文档
+
+[P177 section=1 loc=155 style="6" indent=@v18 spacing=@v13]
+情形B：AI生成的内容帮助拓展了思路，虽然最终未直接采用，但你的设计因此有所改进
+
+[P178 section=1 loc=156 style="6" indent=@v18 spacing=@v13 shading=@v19]
+以下情形不需要记录：仅使用AI翻译、润色文字、解释概念等辅助性操作。
+
+[P179 section=1 loc=157 style="6" indent=@v18 spacing={"before":"0","beforeAutospacing":"0","after":"0","afterAutospacing":"0","line":"240","lineRule":"auto"} shading=@v19]
+AI使用声明表示例（仅填写重要部分）
+
+[P180 section=1 table=3 row=1 cell=1 loc=158/1/1/2 indent=@v1 spacing=@v4]
+实验环节
+
+[P181 section=1 table=3 row=1 cell=2 loc=158/1/2/2 indent=@v1 spacing=@v4]
+使用的AI工具
+
+[P182 section=1 table=3 row=1 cell=3 loc=158/1/3/2 indent=@v1 spacing=@v4]
+输入Prompt
+
+[P183 section=1 table=3 row=1 cell=4 loc=158/1/4/2 indent=@v1 spacing=@v4]
+AI输出摘要
+
+[P184 section=1 table=3 row=1 cell=5 loc=158/1/5/2 indent=@v1 spacing=@v4]
+人工修改内容
+
+[P185 section=1 table=3 row=1 cell=6 loc=158/1/6/2 indent=@v1 spacing=@v4]
+修改原因
+
+[P186 section=1 table=3 row=2 cell=1 loc=158/2/1/2 indent=@v1 spacing=@v4]
+任务一：项目目标梳理
+
+[P187 section=1 table=3 row=2 cell=2 loc=158/2/2/2 indent=@v1 spacing=@v4]
+通义千问
+
+[P188 section=1 table=3 row=2 cell=3 loc=158/2/3/2 indent=@v1 spacing=@v4]
+“我做一个二手交易平台，请帮我明确核心价值、用户角色和业务流程”
+
+[P189 section=1 table=3 row=2 cell=4 loc=158/2/4/2 indent=@v1 spacing=@v4]
+系统核心价值建议、3个用户角色、2个核心流程描述
+
+[P190 section=1 table=3 row=2 cell=5 loc=158/2/5/2 indent=@v1 spacing=@v4]
+删除了“游客”角色，合并为“普通用户”；补充了“商品审核”流程
+
+[P191 section=1 table=3 row=2 cell=6 loc=158/2/6/2 indent=@v1 spacing=@v4]
+AI角色划分过细，实际系统无需游客角色；AI遗漏了商品上架前的审核环节
+
+[P192 section=1 table=3 row=3 cell=1 loc=158/3/1/2 indent=@v1 spacing=@v4]
+任务二：功能清单生成
+
+[P193 section=1 table=3 row=3 cell=2 loc=158/3/2/2 indent=@v1 spacing=@v4]
+Kimi
+
+[P194 section=1 table=3 row=3 cell=3 loc=158/3/3/2 indent=@v1 spacing=@v4]
+“请帮我补充功能模块，用MoSCoW法则标注优先级”
+
+[P195 section=1 table=3 row=3 cell=4 loc=158/3/4/2 indent=@v1 spacing=@v4]
+补充了“聊天功能”、“收藏功能”等8项功能
+
+[P196 section=1 table=3 row=3 cell=5 loc=158/3/5/2 indent=@v1 spacing=@v4]
+删除了“聊天功能”，保留“收藏功能”作为Could Have
+
+[P197 section=1 table=3 row=3 cell=6 loc=158/3/6/2 indent=@v1 spacing=@v4]
+聊天功能开发复杂度高，超出9周开发范围
+
+[P198 section=1 table=3 row=4 cell=1 loc=158/4/1/2 indent=@v1 spacing=@v4]
+任务三：功能模块图
+
+[P199 section=1 table=3 row=4 cell=2 loc=158/4/2/2 indent=@v1 spacing=@v4]
+通义千问
+
+[P200 section=1 table=3 row=4 cell=3 loc=158/4/3/2 indent=@v1 spacing=@v4]
+“根据功能清单生成模块图PlantUML代码”
+
+[P201 section=1 table=3 row=4 cell=4 loc=158/4/4/2 indent=@v1 spacing=@v4]
+生成模块图代码
+
+[P202 section=1 table=3 row=4 cell=5 loc=158/4/5/2 indent=@v1 spacing=@v4]
+调整了模块层级，将“系统设置”从一级模块改为“用户管理”的子模块
+
+[P203 section=1 table=3 row=4 cell=6 loc=158/4/6/2 indent=@v1 spacing=@v4]
+AI划分的模块层级不合理，部分模块归属错误
+
+[P204 section=1 loc=159 indent={"leftChars":"0"} numbering=@v7 align=null keep_lines=null widow=null keep_next=null page_break=null]
+<empty/>

@@ -1,0 +1,170 @@
+﻿
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::               (v2.7.14)
+
+2026-09-22 22:25:05.485  INFO 22304 --- [           main] com.grbroadcast.BroadcastApplication     : Starting BroadcastApplication v1.0.0 using Java 17.0.18 on С��aki with PID 22304 (C:\Users\yyxyz\IdeaProjects\broadcast-system\target\broadcast-system-1.0.0.war started by yyxyz in C:\Users\yyxyz\IdeaProjects\broadcast-system)
+2026-09-22 22:25:05.489  INFO 22304 --- [           main] com.grbroadcast.BroadcastApplication     : The following 1 profile is active: "dev"
+2026-09-22 22:25:08.140  INFO 22304 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8089 (http)
+2026-09-22 22:25:08.144  INFO 22304 --- [           main] o.a.catalina.core.AprLifecycleListener   : Loaded Apache Tomcat Native library [1.3.5] using APR version [1.7.6].
+2026-09-22 22:25:08.145  INFO 22304 --- [           main] o.a.catalina.core.AprLifecycleListener   : APR capabilities: IPv6 [true], sendfile [true], accept filters [false], random [true], UDS [true].
+2026-09-22 22:25:08.145  INFO 22304 --- [           main] o.a.catalina.core.AprLifecycleListener   : APR/OpenSSL configuration: useAprConnector [false], useOpenSSL [true]
+2026-09-22 22:25:08.151  INFO 22304 --- [           main] o.a.catalina.core.AprLifecycleListener   : OpenSSL successfully initialized [OpenSSL 3.0.18 30 Sep 2025]
+2026-09-22 22:25:08.178  INFO 22304 --- [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-09-22 22:25:08.178  INFO 22304 --- [           main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.78]
+2026-09-22 22:25:09.181  INFO 22304 --- [           main] o.a.c.c.C.[Tomcat].[localhost].[/api]    : Initializing Spring embedded WebApplicationContext
+2026-09-22 22:25:09.181  INFO 22304 --- [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 3536 ms
+Logging initialized using 'class org.apache.ibatis.logging.stdout.StdOutImpl' adapter.
+2026-09-22 22:25:09.517  INFO 22304 --- [           main] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
+2026-09-22 22:25:10.693  INFO 22304 --- [           main] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+Registered plugin: 'com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor@1c9f0a20'
+2026-09-22 22:25:11.053 ERROR 22304 --- [           main] c.b.m.core.MybatisConfiguration          : mapper[com.grbroadcast.dao.SongRequestMapper.updateStatus] is ignored, because it exists, maybe from xml file
+2026-09-22 22:25:11.060 ERROR 22304 --- [           main] c.b.m.core.MybatisConfiguration          : mapper[com.grbroadcast.dao.SongRequestMapper.existsById] is ignored, because it exists, maybe from xml file
+2026-09-22 22:25:11.061 ERROR 22304 --- [           main] c.b.m.core.MybatisConfiguration          : mapper[com.grbroadcast.dao.SongRequestMapper.getAllWithStudent] is ignored, because it exists, maybe from xml file
+2026-09-22 22:25:11.063 ERROR 22304 --- [           main] c.b.m.core.MybatisConfiguration          : mapper[com.grbroadcast.dao.SongRequestMapper.getSongRequestWithStudent] is ignored, because it exists, maybe from xml file
+2026-09-22 22:25:11.063 ERROR 22304 --- [           main] c.b.m.core.MybatisConfiguration          : mapper[com.grbroadcast.dao.SongRequestMapper.getByStatusWithInfo] is ignored, because it exists, maybe from xml file
+2026-09-22 22:25:11.064 ERROR 22304 --- [           main] c.b.m.core.MybatisConfiguration          : mapper[com.grbroadcast.dao.SongRequestMapper.getByStudentIdWithInfo] is ignored, because it exists, maybe from xml file
+Parsed mapper file: 'class path resource [mapper/SongRequestMapper.xml]'
+2026-09-22 22:25:11.197 ERROR 22304 --- [           main] c.b.m.core.MybatisConfiguration          : mapper[com.grbroadcast.dao.UserMapper.findByUsername] is ignored, because it exists, maybe from xml file
+Parsed mapper file: 'class path resource [mapper/UserMapper.xml]'
+ _ _   |_  _ _|_. ___ _ |    _ 
+| | |\/|_)(_| | |_\  |_)||_|_\ 
+     /               |         
+                        3.5.3.1 
+2026-09-22 22:25:11.722  WARN 22304 --- [           main] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: 3afa227d-aa8e-406d-959e-5acaa4a71cdd
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2026-09-22 22:25:11.878  INFO 22304 --- [           main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@4c4f4365, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@acf859d, org.springframework.security.web.context.SecurityContextPersistenceFilter@408b87aa, org.springframework.security.web.header.HeaderWriterFilter@344426bf, org.springframework.security.web.authentication.logout.LogoutFilter@7d0cc890, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@787f32b7, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@76c52298, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@6df3e44c, org.springframework.security.web.session.SessionManagementFilter@69da0b12, org.springframework.security.web.access.ExceptionTranslationFilter@26a4551a, org.springframework.security.web.access.intercept.AuthorizationFilter@889d9e8]
+2026-09-22 22:25:12.501  INFO 22304 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8089 (http) with context path '/api'
+2026-09-22 22:25:12.522  INFO 22304 --- [           main] com.grbroadcast.BroadcastApplication     : Started BroadcastApplication in 8.053 seconds (JVM running for 8.676)
+==   ����㲥վ���Ͷ��ϵͳ����ɹ�   ==
+==   API��ַ: http://localhost:8089/api ==
+2026-09-22 22:28:18.657  INFO 22304 --- [nio-8089-exec-3] o.a.c.c.C.[Tomcat].[localhost].[/api]    : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-09-22 22:28:18.657  INFO 22304 --- [nio-8089-exec-3] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-09-22 22:28:18.658  INFO 22304 --- [nio-8089-exec-3] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@13b771b0] was not registered for synchronization because synchronization is not active
+JDBC Connection [ConnectionProxyImpl{connectedTime=2026-09-22 22:25:10.686, closeCount=0, lastValidateTimeMillis=2026-09-22 22:28:20.389}] will not be managed by Spring
+==>  Preparing: SELECT id,student_id,song_name,singer,message,status,audit_time,play_time,create_time FROM song_request
+==> Parameters: 
+<==    Columns: id, student_id, song_name, singer, message, status, audit_time, play_time, create_time
+<==        Row: 1, 4, ����, �ܽ���, ���Լо�����-���ڵ�Ԫ����, approved, 2026-09-22 11:54:20, null, 2026-09-22 11:24:19
+<==        Row: 3, 1, ��ͤ��, �ܽ���, �͸�ȫ��ͬѧ, pending, null, null, 2026-05-29 00:18:12
+<==        Row: 5, 4, ҹ��, �ܽ���, �͸�ȫ��ͬѧ1111, rejected, 2026-06-28 01:39:57, null, 2026-05-29 00:18:52
+<==        Row: 6, 1, ����, �ܽ���, �͸�ȫ��ͬѧ, pending, null, null, 2026-05-29 00:24:17
+<==        Row: 7, 8, ָ��, ������, 111111, approved, 2026-06-28 00:55:30, null, 2026-06-28 00:33:41
+<==        Row: 8, 4, ��ҹ��, ��Խ, ף�㲥վԽ��Խ�ã�, pending, null, null, 2026-06-28 01:05:42
+<==        Row: 9, 8, ͬ��˳, 1, 1, approved, 2026-06-28 17:48:55, null, 2026-06-28 17:47:59
+<==        Row: 10, 8, ָ��, ������, 111, approved, 2026-07-01 00:27:10, null, 2026-07-01 00:26:31
+<==        Row: 11, 8, ָ��, ������, 11, approved, 2026-07-01 12:37:35, null, 2026-07-01 12:36:48
+<==        Row: 12, 1, ����, �ܽ���, �͸�ȫ��ͬѧ, pending, null, null, 2026-07-09 17:38:19
+<==        Row: 13, 1, ����, �ܽ���, �͸�ȫ��ͬѧ, pending, null, null, 2026-09-22 11:25:12
+<==        Row: 14, 1, ����, �ܽ���, �͸�ȫ��ͬѧ, pending, null, null, 2026-09-22 11:54:19
+<==      Total: 12
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@13b771b0]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@fafe5bc] was not registered for synchronization because synchronization is not active
+JDBC Connection [ConnectionProxyImpl{connectedTime=2026-09-22 22:25:10.686, closeCount=0, lastValidateTimeMillis=2026-09-22 22:28:20.389}] will not be managed by Spring
+==>  Preparing: SELECT id,student_id,title,content,type,status,audit_time,create_time FROM article
+==> Parameters: 
+<==    Columns: id, student_id, title, content, type, status, audit_time, create_time
+<==        Row: 2, 4, �ഺ���������, <<BLOB>>, poem, approved, 2026-06-28 01:14:53, 2026-06-28 00:56:11
+<==        Row: 3, 4, У԰��������������泿��, <<BLOB>>, story, approved, 2026-06-28 01:15:59, 2026-06-28 01:04:15
+<==        Row: 5, 8, �㲥վ2026���＾ѧ�ڽ�Ŀ������ʽ����, <<BLOB>>, news, approved, 2026-06-28 01:35:07, 2026-06-28 01:24:07
+<==        Row: 6, 8, �˶�����͸壨ʾ����, <<BLOB>>, news, rejected, 2026-06-28 01:35:14, 2026-06-28 01:24:21
+<==        Row: 7, 4, ��ҵ���ر��Ŀ��������, <<BLOB>>, story, pending, null, 2026-09-22 11:26:21
+<==      Total: 5
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@fafe5bc]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5ea6cad2] was not registered for synchronization because synchronization is not active
+2026-09-22 22:28:20.714  WARN 22304 --- [nio-8089-exec-7] c.b.m.c.t.support.ReflectLambdaMeta      : Unable to make field private final java.lang.Class java.lang.invoke.SerializedLambda.capturingClass accessible: module java.base does not "opens java.lang.invoke" to unnamed module @2133c8f8
+JDBC Connection [ConnectionProxyImpl{connectedTime=2026-09-22 22:25:10.686, closeCount=0, lastValidateTimeMillis=2026-09-22 22:28:20.389}] will not be managed by Spring
+==>  Preparing: SELECT id,staff_id,title,file_path,file_size,duration,play_count,status,create_time FROM audio WHERE (status = ?) ORDER BY create_time DESC
+==> Parameters: 1(Integer)
+<==    Columns: id, staff_id, title, file_path, file_size, duration, play_count, status, create_time
+<==        Row: 3, 5, ����, /uploads/5c59c753-9086-413d-aad1-9e1ba769356d.mp3, 8941319, null, 0, 1, 2026-07-01 12:38:28
+<==        Row: 1, 5, ����, /uploads/cdb00ff0-6569-46a6-89c0-b5da0d6c2883.m4s, 6201843, null, 0, 1, 2026-06-29 00:00:00
+<==      Total: 2
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5ea6cad2]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@13d24d98] was not registered for synchronization because synchronization is not active
+JDBC Connection [ConnectionProxyImpl{connectedTime=2026-09-22 22:25:10.686, closeCount=0, lastValidateTimeMillis=2026-09-22 22:28:20.389}] will not be managed by Spring
+==>  Preparing: SELECT id,user_id,content,reply,status,create_time FROM message WHERE (status = ?) ORDER BY create_time DESC
+==> Parameters: 1(Integer)
+<==    Columns: id, user_id, content, reply, status, create_time
+<==        Row: 3, 4, ��û��Ͷ��ĸ��ѽ��, null, 1, 2026-09-22 11:26:21
+<==        Row: 2, 4, ��һ�ס�����ˡ��͸�������ҵ��ѧ��ѧ���ǣ�, ���յ������������Ŀ��Ϊ�㲥��~, 1, 2026-06-28 01:11:59
+<==        Row: 1, 8, �㲥վ�Ľ�ĿԽ��Խ�����ˣ�ϣ���ܶ��һЩ�ܽ��׵ĸ�~, ��л��Ľ��飡���ǻ������ܽ��׸赥�Ĳ���Ƶ�Σ���������~, 1, 2026-06-28 01:10:37
+<==      Total: 3
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@13d24d98]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7ced2e8d] was not registered for synchronization because synchronization is not active
+JDBC Connection [ConnectionProxyImpl{connectedTime=2026-09-22 22:25:10.686, closeCount=0, lastValidateTimeMillis=2026-09-22 22:28:20.389}] will not be managed by Spring
+==>  Preparing: SELECT id,staff_id,date,time_slot,program_name,content,songs,status,publish_time,create_time FROM program_schedule
+==> Parameters: 
+<==    Columns: id, staff_id, date, time_slot, program_name, content, songs, status, publish_time, create_time
+<==        Row: 1, 5, 2026-09-21, 12:00-12:30, ������߷�, <<BLOB>>, <<BLOB>>, published, 2026-09-22 11:26:21, 2026-06-28 01:39:16
+<==        Row: 2, 5, 2026-09-22, 17:30-18:00, ����У԰, <<BLOB>>, <<BLOB>>, published, 2026-09-22 11:26:21, 2026-06-28 01:39:16
+<==        Row: 3, 5, 2026-09-23, 12:00-12:30, ��������, <<BLOB>>, <<BLOB>>, published, 2026-09-22 11:26:21, 2026-09-22 11:26:21
+<==      Total: 3
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7ced2e8d]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@399cd6ce] was not registered for synchronization because synchronization is not active
+JDBC Connection [ConnectionProxyImpl{connectedTime=2026-09-22 22:25:10.686, closeCount=0, lastValidateTimeMillis=2026-09-22 22:28:20.389}] will not be managed by Spring
+==>  Preparing: SELECT id,student_id,song_name,singer,message,status,audit_time,play_time,create_time FROM song_request WHERE id=?
+==> Parameters: 1(Long)
+<==    Columns: id, student_id, song_name, singer, message, status, audit_time, play_time, create_time
+<==        Row: 1, 4, ����, �ܽ���, ���Լо�����-���ڵ�Ԫ����, approved, 2026-09-22 11:54:20, null, 2026-09-22 11:24:19
+<==      Total: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@399cd6ce]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2bbe91e6] was not registered for synchronization because synchronization is not active
+JDBC Connection [ConnectionProxyImpl{connectedTime=2026-09-22 22:25:10.686, closeCount=0, lastValidateTimeMillis=2026-09-22 22:28:20.389}] will not be managed by Spring
+==>  Preparing: SELECT id,student_id,song_name,singer,message,status,audit_time,play_time,create_time FROM song_request WHERE ((song_name LIKE ? OR singer LIKE ?)) ORDER BY create_time DESC
+==> Parameters: %��%(String), %��%(String)
+<==    Columns: id, student_id, song_name, singer, message, status, audit_time, play_time, create_time
+<==        Row: 14, 1, ����, �ܽ���, �͸�ȫ��ͬѧ, pending, null, null, 2026-09-22 11:54:19
+<==        Row: 13, 1, ����, �ܽ���, �͸�ȫ��ͬѧ, pending, null, null, 2026-09-22 11:25:12
+<==        Row: 1, 4, ����, �ܽ���, ���Լо�����-���ڵ�Ԫ����, approved, 2026-09-22 11:54:20, null, 2026-09-22 11:24:19
+<==        Row: 12, 1, ����, �ܽ���, �͸�ȫ��ͬѧ, pending, null, null, 2026-07-09 17:38:19
+<==        Row: 6, 1, ����, �ܽ���, �͸�ȫ��ͬѧ, pending, null, null, 2026-05-29 00:24:17
+<==        Row: 5, 4, ҹ��, �ܽ���, �͸�ȫ��ͬѧ1111, rejected, 2026-06-28 01:39:57, null, 2026-05-29 00:18:52
+<==        Row: 3, 1, ��ͤ��, �ܽ���, �͸�ȫ��ͬѧ, pending, null, null, 2026-05-29 00:18:12
+<==      Total: 7
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2bbe91e6]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@143fa7de] was not registered for synchronization because synchronization is not active
+JDBC Connection [ConnectionProxyImpl{connectedTime=2026-09-22 22:25:10.686, closeCount=0, lastValidateTimeMillis=2026-09-22 22:28:20.389}] will not be managed by Spring
+==>  Preparing: SELECT id,student_id,title,content,type,status,audit_time,create_time FROM article WHERE (status = ?) ORDER BY create_time DESC
+==> Parameters: approved(String)
+<==    Columns: id, student_id, title, content, type, status, audit_time, create_time
+<==        Row: 5, 8, �㲥վ2026���＾ѧ�ڽ�Ŀ������ʽ����, <<BLOB>>, news, approved, 2026-06-28 01:35:07, 2026-06-28 01:24:07
+<==        Row: 3, 4, У԰��������������泿��, <<BLOB>>, story, approved, 2026-06-28 01:15:59, 2026-06-28 01:04:15
+<==        Row: 2, 4, �ഺ���������, <<BLOB>>, poem, approved, 2026-06-28 01:14:53, 2026-06-28 00:56:11
+<==      Total: 3
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@143fa7de]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5cf1f49f] was not registered for synchronization because synchronization is not active
+JDBC Connection [ConnectionProxyImpl{connectedTime=2026-09-22 22:25:10.686, closeCount=0, lastValidateTimeMillis=2026-09-22 22:28:20.389}] will not be managed by Spring
+==>  Preparing: SELECT id,staff_id,date,time_slot,program_name,content,songs,status,publish_time,create_time FROM program_schedule WHERE (program_name LIKE ?) ORDER BY date DESC
+==> Parameters: %����%(String)
+<==    Columns: id, staff_id, date, time_slot, program_name, content, songs, status, publish_time, create_time
+<==        Row: 1, 5, 2026-09-21, 12:00-12:30, ������߷�, <<BLOB>>, <<BLOB>>, published, 2026-09-22 11:26:21, 2026-06-28 01:39:16
+<==      Total: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5cf1f49f]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@378133d6] was not registered for synchronization because synchronization is not active
+JDBC Connection [ConnectionProxyImpl{connectedTime=2026-09-22 22:25:10.686, closeCount=0, lastValidateTimeMillis=2026-09-22 22:28:20.389}] will not be managed by Spring
+==>  Preparing: SELECT id,username,password,real_name,student_id,role,phone,email,status,create_time FROM user WHERE (username = ?)
+==> Parameters: student1(String)
+<==    Columns: id, username, password, real_name, student_id, role, phone, email, status, create_time
+<==        Row: 4, student1, e10adc3949ba59abbe56e057f20f883e, yzy, 2024001, student, 13800138001, student1@example.com, 1, 2026-05-27 11:20:09
+<==      Total: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@378133d6]

@@ -1,0 +1,61 @@
+# ============================================================
+# 广播站点歌与投稿系统 - 开发环境（dev）配置
+# 数据源：Druid 连接池；开启 Druid 监控（StatViewServlet / WebStatFilter）
+# 监控页面：http://localhost:8089/api/druid  账号：admin / admin123
+# ============================================================
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/broadcast_db?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai
+    username: root
+    password: root
+    druid:
+      # ===== 连接池基础配置 =====
+      initial-size: 5
+      min-idle: 5
+      max-active: 20
+      max-wait: 60000
+      # 检测连接有效性
+      validation-query: SELECT 1
+      test-while-idle: true
+      test-on-borrow: false
+      test-on-return: false
+      # 空闲回收
+      time-between-eviction-runs-millis: 60000
+      min-evictable-idle-time-millis: 300000
+      # ===== Druid 监控台（StatViewServlet）=====
+      stat-view-servlet:
+        enabled: true
+        url-pattern: /druid/*
+        login-username: admin
+        login-password: admin123
+        reset-enable: false
+      # ===== Web 应用监控（WebStatFilter）=====
+      web-stat-filter:
+        enabled: true
+        url-pattern: /*
+        exclusions: '*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*'
+      # ===== 过滤器：统计 + 慢SQL日志 + SQL防火墙 =====
+      filter:
+        stat:
+          enabled: true
+          slow-sql-millis: 1000
+          log-slow-sql: true
+          merge-sql: true
+          db-type: mysql
+        wall:
+          enabled: true
+          db-type: mysql
+          config:
+            multi-statement-allow: true
+
+mybatis-plus:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.grbroadcast.entity
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+file:
+  upload-path: F:/upload/
