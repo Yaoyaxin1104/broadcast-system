@@ -6,6 +6,7 @@ import com.grbroadcast.entity.User;
 import com.grbroadcast.service.MessageService;
 import com.grbroadcast.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import java.time.LocalDateTime;
 
@@ -22,6 +23,7 @@ public class MessageController {
 
     // 学生端 - 发布留言
     @PostMapping("/add")
+    @PreAuthorize("@ss.hasPermi('message:add')")
     public Result addMessage(@RequestBody Message message, @RequestParam Long userId) {
         User user = userService.getById(userId);
         if (user == null) {
@@ -35,12 +37,14 @@ public class MessageController {
 
     // 管理端 - 删除留言
     @DeleteMapping("/delete/{id}")
+    @PreAuthorize("@ss.hasPermi('message:reply')")
     public Result deleteMessage(@PathVariable Long id) {
         return messageService.removeById(id) ? Result.success("删除成功") : Result.error("删除失败");
     }
 
     // 管理端 - 回复留言（接收 userId 参数）
     @PutMapping("/reply/{id}")
+    @PreAuthorize("@ss.hasPermi('message:reply')")
     public Result replyMessage(@PathVariable Long id,
                                @RequestParam String reply,
                                @RequestParam Long userId) {

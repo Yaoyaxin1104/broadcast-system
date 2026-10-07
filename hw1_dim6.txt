@@ -1,0 +1,44 @@
+# Dimension 6: media and embedded objects
+source: F:\学号-姓名-作业1-Web应用项目需求分析与系统设计报告.docx
+syntax: [OBJECT<n>] identifies a package object, [REL<n>] a reference, and [ANCHOR<n>] its source Run.
+omitted: record_type; Run formatting and raw Run XML, which belong to dimension 4.
+normalized: drawing OOXML uses compact prefix:tag(attribute,child) notation.
+
+[OBJECT1 part="word/media/image1.png" kind="media" type="image/png" size=52196 sha256="fd6f7a704b123e7221ac103d15d18beac8d0ee09132a167115b391a8af706773" relationship_ids=["rId7"]]
+[REL1 part="word/document.xml" id="rId7" type="image"]
+
+[OBJECT2 part="word/media/image2.png" kind="media" type="image/png" size=26999 sha256="a2a5ec06c454c66a85325dcd82c7ae08afd6bd911151aac3eba25d2fc8e0b1c5" relationship_ids=["rId8"]]
+[REL1 part="word/document.xml" id="rId8" type="image"]
+
+[OBJECT3 part="word/media/image3.png" kind="media" type="image/png" size=199158 sha256="9b9bf9d4e1e602f6855ea9ec854668bda7525bcf27fcfc0186e5e8c5e3d3d2f5" relationship_ids=["rId9"]]
+[REL1 part="word/document.xml" id="rId9" type="image"]
+
+[OBJECT4 part="word/media/image4.png" kind="media" type="image/png" size=15402 sha256="ff68ea158f4d1dfad7b4baa90ce42f9d008a6248d0dc7d1a6d25d99e64376c68" relationship_ids=["rId10"]]
+[REL1 part="word/document.xml" id="rId10" type="image"]
+
+[OBJECT5 part="word/media/image5.png" kind="media" type="image/png" size=15863 sha256="1d3922cb0840536c285d2aafba9ea8eed29f918bfa66f8224e1b4b7520aa418b" relationship_ids=["rId11"]]
+[REL1 part="word/document.xml" id="rId11" type="image"]
+
+[ANCHOR1 part="word/document.xml" paragraph=1 run=1 section=1 loc="/w:document/w:body/w:p[1]/w:r"]
+[DRAWING1 relationship_id="rId7" relationship_ids=["rId7"] target="media/image1.png" resolved_target="word/media/image1.png" targets=[{"relationship_id":"rId7","target":"media/image1.png","resolved_target":"word/media/image1.png","target_mode":null}] name="图片 1" alt_text="广州软件学院LOGO横排" size_emu={"cx":"5248910","cy":"1584325"} positioning="wp:inline" location="/w:document/w:body/w:p[1]/w:r/w:drawing"]
+structure=w:drawing(wp:inline(distT="0",distB="0",distL="114300",distR="114300",wp:extent(cx="5248910",cy="1584325"),wp:effectExtent(l="0",t="0",r="8890",b="15875"),wp:docPr(id="1",name="图片 1",descr="广州软件学院LOGO横排"),wp:cNvGraphicFramePr(a:graphicFrameLocks(noChangeAspect="1")),a:graphic(a:graphicData(uri="http://schemas.openxmlformats.org/drawingml/2006/picture",pic:pic(pic:nvPicPr(pic:cNvPr(id="1",name="图片 1",descr="广州软件学院LOGO横排"),pic:cNvPicPr(a:picLocks(noChangeAspect="1"))),pic:blipFill(a:blip(r:embed="rId7"),a:stretch(a:fillRect())),pic:spPr(a:xfrm(a:off(x="0",y="0"),a:ext(cx="5248910",cy="1584325")),a:prstGeom(prst="rect",a:avLst()),a:noFill(),a:ln(a:noFill())))))))
+
+[ANCHOR2 part="word/document.xml" paragraph=26 run=1 section=1 loc="/w:document/w:body/w:p[26]/w:r"]
+[DRAWING1 name="直接连接符 21" size_emu={"cx":"5299075","cy":"0"} positioning="wp:anchor" location="/w:document/w:body/w:p[26]/w:r/w:drawing"]
+structure=w:drawing(wp:anchor(distT="0",distB="0",distL="114300",distR="114300",simplePos="0",relativeHeight="251659264",behindDoc="0",locked="0",layoutInCell="1",allowOverlap="1",wp:simplePos(x="0",y="0"),wp:positionH(relativeFrom="column",wp:posOffset(text="-74930")),wp:positionV(relativeFrom="paragraph",wp:posOffset(text="111760")),wp:extent(cx="5299075",cy="0"),wp:effectExtent(l="0",t="4445",r="0",b="5080"),wp:wrapNone(),wp:docPr(id="21",name="直接连接符 21"),wp:cNvGraphicFramePr(),a:graphic(a:graphicData(uri="http://schemas.microsoft.com/office/word/2010/wordprocessingShape",wps:wsp(wps:cNvCnPr(),wps:spPr(a:xfrm(a:off(x="0",y="0"),a:ext(cx="5299075",cy="0")),a:prstGeom(prst="line",a:avLst()),a:noFill(),a:ln(w="9525",cap="flat",cmpd="sng",algn="ctr",a:solidFill(a:sysClr(val="windowText",lastClr="000000",a:shade(val="95000"),a:satMod(val="105000"))),a:prstDash(val="solid")),a:effectLst()),wps:bodyPr())))))
+
+[ANCHOR3 part="word/document.xml" paragraph=104 run=1 section=1 loc="/w:document/w:body/w:p[76]/w:r"]
+[DRAWING1 relationship_id="rId8" relationship_ids=["rId8"] target="media/image2.png" resolved_target="word/media/image2.png" targets=[{"relationship_id":"rId8","target":"media/image2.png","resolved_target":"word/media/image2.png","target_mode":null}] name="图片 3" alt_text="IMG_256" size_emu={"cx":"5269865","cy":"3551555"} positioning="wp:inline" location="/w:document/w:body/w:p[76]/w:r/w:drawing"]
+structure=w:drawing(wp:inline(distT="0",distB="0",distL="114300",distR="114300",wp:extent(cx="5269865",cy="3551555"),wp:effectExtent(l="0",t="0",r="6985",b="10795"),wp:docPr(id="3",name="图片 3",descr="IMG_256"),wp:cNvGraphicFramePr(a:graphicFrameLocks(noChangeAspect="1")),a:graphic(a:graphicData(uri="http://schemas.openxmlformats.org/drawingml/2006/picture",pic:pic(pic:nvPicPr(pic:cNvPr(id="3",name="图片 3",descr="IMG_256"),pic:cNvPicPr(a:picLocks(noChangeAspect="1"))),pic:blipFill(a:blip(r:embed="rId8"),a:stretch(a:fillRect())),pic:spPr(a:xfrm(a:off(x="0",y="0"),a:ext(cx="5269865",cy="3551555")),a:prstGeom(prst="rect",a:avLst()),a:noFill(),a:ln(w="9525",a:noFill())))))))
+
+[ANCHOR4 part="word/document.xml" paragraph=167 run=1 section=1 loc="/w:document/w:body/w:p[84]/w:r"]
+[DRAWING1 relationship_id="rId9" relationship_ids=["rId9"] target="media/image3.png" resolved_target="word/media/image3.png" targets=[{"relationship_id":"rId9","target":"media/image3.png","resolved_target":"word/media/image3.png","target_mode":null}] name="图片 5" alt_text="IMG_256" size_emu={"cx":"5261610","cy":"1019175"} positioning="wp:inline" location="/w:document/w:body/w:p[84]/w:r/w:drawing"]
+structure=w:drawing(wp:inline(distT="0",distB="0",distL="114300",distR="114300",wp:extent(cx="5261610",cy="1019175"),wp:effectExtent(l="0",t="0",r="15240",b="9525"),wp:docPr(id="5",name="图片 5",descr="IMG_256"),wp:cNvGraphicFramePr(a:graphicFrameLocks(noChangeAspect="1")),a:graphic(a:graphicData(uri="http://schemas.openxmlformats.org/drawingml/2006/picture",pic:pic(pic:nvPicPr(pic:cNvPr(id="5",name="图片 5",descr="IMG_256"),pic:cNvPicPr(a:picLocks(noChangeAspect="1"))),pic:blipFill(a:blip(r:embed="rId9"),a:stretch(a:fillRect())),pic:spPr(a:xfrm(a:off(x="0",y="0"),a:ext(cx="5261610",cy="1019175")),a:prstGeom(prst="rect",a:avLst()),a:noFill(),a:ln(w="9525",a:noFill())))))))
+
+[ANCHOR5 part="word/document.xml" paragraph=171 run=1 section=1 loc="/w:document/w:body/w:p[88]/w:r"]
+[DRAWING1 relationship_id="rId10" relationship_ids=["rId10"] target="media/image4.png" resolved_target="word/media/image4.png" targets=[{"relationship_id":"rId10","target":"media/image4.png","resolved_target":"word/media/image4.png","target_mode":null}] name="图片 6" alt_text="IMG_256" size_emu={"cx":"2609850","cy":"5838825"} positioning="wp:inline" location="/w:document/w:body/w:p[88]/w:r/w:drawing"]
+structure=w:drawing(wp:inline(distT="0",distB="0",distL="114300",distR="114300",wp:extent(cx="2609850",cy="5838825"),wp:effectExtent(l="0",t="0",r="0",b="9525"),wp:docPr(id="6",name="图片 6",descr="IMG_256"),wp:cNvGraphicFramePr(a:graphicFrameLocks(noChangeAspect="1")),a:graphic(a:graphicData(uri="http://schemas.openxmlformats.org/drawingml/2006/picture",pic:pic(pic:nvPicPr(pic:cNvPr(id="6",name="图片 6",descr="IMG_256"),pic:cNvPicPr(a:picLocks(noChangeAspect="1"))),pic:blipFill(a:blip(r:embed="rId10"),a:stretch(a:fillRect())),pic:spPr(a:xfrm(a:off(x="0",y="0"),a:ext(cx="2609850",cy="5838825")),a:prstGeom(prst="rect",a:avLst()),a:noFill(),a:ln(w="9525",a:noFill())))))))
+
+[ANCHOR6 part="word/document.xml" paragraph=306 run=1 section=1 loc="/w:document/w:body/w:p[111]/w:r"]
+[DRAWING1 relationship_id="rId11" relationship_ids=["rId11"] target="media/image5.png" resolved_target="word/media/image5.png" targets=[{"relationship_id":"rId11","target":"media/image5.png","resolved_target":"word/media/image5.png","target_mode":null}] name="图片 7" alt_text="IMG_256" size_emu={"cx":"5253990","cy":"846455"} positioning="wp:inline" location="/w:document/w:body/w:p[111]/w:r/w:drawing"]
+structure=w:drawing(wp:inline(distT="0",distB="0",distL="114300",distR="114300",wp:extent(cx="5253990",cy="846455"),wp:effectExtent(l="0",t="0",r="3810",b="10795"),wp:docPr(id="7",name="图片 7",descr="IMG_256"),wp:cNvGraphicFramePr(a:graphicFrameLocks(noChangeAspect="1")),a:graphic(a:graphicData(uri="http://schemas.openxmlformats.org/drawingml/2006/picture",pic:pic(pic:nvPicPr(pic:cNvPr(id="7",name="图片 7",descr="IMG_256"),pic:cNvPicPr(a:picLocks(noChangeAspect="1"))),pic:blipFill(a:blip(r:embed="rId11"),a:stretch(a:fillRect())),pic:spPr(a:xfrm(a:off(x="0",y="0"),a:ext(cx="5253990",cy="846455")),a:prstGeom(prst="rect",a:avLst()),a:noFill(),a:ln(w="9525",a:noFill())))))))

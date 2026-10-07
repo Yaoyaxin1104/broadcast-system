@@ -7,6 +7,7 @@ import com.grbroadcast.service.AudioService;
 import com.grbroadcast.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -35,6 +36,7 @@ public class AudioController {
 
     // ========== 上传音频 ==========
     @PostMapping("/upload")
+    @PreAuthorize("@ss.hasPermi('audio:upload')")
     public Result uploadAudio(@RequestParam("file") MultipartFile file,
                               @RequestParam("title") String title,
                               @RequestParam("userId") Long userId) {
@@ -116,6 +118,7 @@ public class AudioController {
 
     // ========== 删除音频 ==========
     @DeleteMapping("/delete/{id}")
+    @PreAuthorize("@ss.hasPermi('audio:delete')")
     public Result deleteAudio(@PathVariable Long id) {
         return audioService.removeById(id) ? Result.success("删除成功") : Result.error("删除失败");
     }

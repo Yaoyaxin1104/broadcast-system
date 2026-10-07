@@ -1,0 +1,31 @@
+﻿=========== 实验4 认证授权验证记录 ===========
+--- 1. 无令牌访问 /auth/info（预期 401）---
+HTTP 401  {"code":401,"msg":"未登录或登录已过期，请重新登录"}
+--- 2. staff1 登录（预期返回 token）---
+HTTP 200  {"code":200,"msg":"ç»å½æå","data":{"expire":3600,"user":{"permissions":["article:edit","audio:upload","program:list","article:audit","article:add","song:audit","audio:delete","message:add","menu:list","song:add","audio:list","program:publish","article:list","message:reply","program:edit","song:delete","article:delete","song:list","menu:grant","message:list","song:edit","program:delete"],"roles":["staff"],"userId":5,"username":"staff1"},"token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE3OTEzODY5MDYsInVzZXJJZCI6NSwiaWF0IjoxNzkxMzgzMzA2fQ.WiK0TlY48wbpBuo-zjPvzkEuXEU9i8Ye4-QTGIHuTFY"}}
+--- 3. 携带 staff 令牌访问 /auth/info（预期 200）---
+HTTP 200  {"code":200,"msg":"success","data":{"permissions":["article:edit","audio:upload","program:list","article:audit","article:add","song:audit","audio:delete","message:add","menu:list","song:add","audio:list","program:publish","article:list","message:reply","program:edit","song:delete","article:delete","song:list","menu:grant","message:list","song:edit","program:delete"],"userId":5,"username":"staff1"}}
+--- 4. staff 查询菜单树 /menu/tree（预期 200）---
+HTTP 200  {"code":200,"msg":"success","data":[{"id":100,"menuName":"ç¨æ·ä¸æé","parentId":0,"menuType":"M","path":null,"component":null,"perms":null,"icon":"user","orderNum":1,"visible":1,"status":1,"createTime":"2026-10-07T21:45:33","children":[{"id":101,"menuName":"èåç®¡ç","parentId":100,"menuTy
+--- 5. staff 访问待审核点歌 /song/pending（预期 200）---
+HTTP 200  {"code":200,"msg":"success","data":[{"id":3,"studentId":1,"songName":"å\u0085°äº­åº","singer":"å¨æ°ä¼¦","message":"éç»å\u0085¨ä½åå­¦","status":"pending","auditTime":null,"playTime":null,"createTime":"2026-05-29T00:18:12","studentName":null,"studentNo":null},{"id":6,"studentId":1,"songName":"ç¨»é¦","singer":"å¨æ°ä¼¦","message":"éç»å\u0085¨ä½åå­¦","status":"pending","auditTime":null,"playTime":null,"createTime":"2026-05-29T00:24:17","studentName":null,"studentNo":null},{"id":8,"studentId":4,"songName":"å¬å¤é¨","singer":"ç¤¼è¶","message":"ç¥å¹¿æ­ç«è¶åè¶å¥½ï¼","status":"pending","auditTime":null,"playTime":null,"createTime":"2026-06-28T01:05:42","studentName":null,"studentNo":null},{"id":12,"studentId":1,"songName":"ç¨»é¦","singer":"å¨æ°ä¼¦","message":"éç»å\u0085¨ä½åå­¦","status":"pending","auditTime":null,"playTime":null,"createTime":"2026-07-09T17:38:19","studentName":null,"studentNo":null},{"id":13,"studentId":1,"songName":"ç¨»é¦","singer":"å¨æ°ä¼¦","message":"éç»å\u0085¨ä½åå­¦","status":"pending","auditTime":null,"playTime":null,"createTime":"2026-09-22T11:25:12","studentName":null,"studentNo":null},{"id":14,"studentId":1,"songName":"ç¨»é¦","singer":"å¨æ°ä¼¦","message":"éç»å\u0085¨ä½åå­¦","status":"pending","auditTime":null,"playTime":null,"createTime":"2026-09-22T11:54:19","studentName":null,"studentNo":null},{"id":15,"studentId":4,"songName":"æµè¯æ­æ²-å®éª4","singer":"æµè¯æ­æ","message":null,"status":"pending","auditTime":null,"playTime":null,"createTime":"2026-10-07T22:27:19","studentName":null,"studentNo":null}]}
+--- 6. Redis 中查看登录缓存键与值 ---
+KEYS: login:user:5
+VALUE login:user:5 = {"@type":"com.grbroadcast.security.LoginUser","accountNonExpired":true,"accountNonLocked":true,"credentialsNonExpired":true,"enabled":true,"password":"$2a$10$TWdjcyM1b.FMMjn1b09mTe13uyClC0NfYsULzb8j1GtzOsIF3i4Xe","permissions":Set["article:edit","audio:upload","program:list","article:audit","article:add","song:audit","audio:delete","message:add","menu:list","song:add","audio:list","program:publish","article:list","message:reply","program:edit","song:delete","article:delete","song:list","menu:grant","message:list","song:edit","program:delete"],"roles":Set["staff"],"status":1,"userId":5,"username":"staff1"}
+--- 7. 解开 JWT 令牌查看载荷（预期仅 userId/iat/exp）---
+PAYLOAD: {"exp":1791386906,"userId":5,"iat":1791383306}
+--- 8. student1 登录 ---
+HTTP 200  {"code":200,"msg":"ç»å½æå","data":{"expire":3600,"user":{"permissions":["article:list","program:list","article:add","song:list","message:add","song:add","message:list","audio:list"],"roles":["student"],"userId":4,"username":"student1"},"token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE3OTEzODY5MDcsInVzZXJJZCI6NCwiaWF0IjoxNzkxMzgzMzA3fQ.0PUp7AsUs_w1OwPJCvZIaLSS7Mh8OWXJfrUPnSgggtE"}}
+--- 9. student 访问待审核点歌 /song/pending（预期 403）---
+HTTP 403  {"code":403,"msg":"没有操作权限"}
+--- 10. student 提交点歌 /song/add?userId=4（预期 200）---
+HTTP 200  {"code":200,"msg":"æäº¤æå","data":null}
+--- 11. staff 退出登录 ---
+HTTP 200  {"code":200,"msg":"éåºæå","data":null}
+--- 12. 退出后原令牌再访问 /auth/info（预期 401）---
+HTTP 401  {"code":401,"msg":"未登录或登录已过期，请重新登录"}
+--- 13. 错误密码登录（预期 账号或密码错误）---
+HTTP 200  {"code":500,"msg":"è´¦å·æå¯ç éè¯¯","data":null}
+=========== 验证结束 ===========
+STAFF_TOKEN=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE3OTEzODY5MDYsInVzZXJJZCI6NSwiaWF0IjoxNzkxMzgzMzA2fQ.WiK0TlY48wbpBuo-zjPvzkEuXEU9i8Ye4-QTGIHuTFY
+STUDENT_TOKEN=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE3OTEzODY5MDcsInVzZXJJZCI6NCwiaWF0IjoxNzkxMzgzMzA3fQ.0PUp7AsUs_w1OwPJCvZIaLSS7Mh8OWXJfrUPnSgggtE

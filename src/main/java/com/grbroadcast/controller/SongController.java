@@ -7,9 +7,8 @@ import com.grbroadcast.entity.User;
 import com.grbroadcast.service.SongService;
 import com.grbroadcast.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-
-import javax.servlet.http.HttpSession;
 
 @CrossOrigin(origins = "*", allowCredentials = "false")
 @RestController
@@ -24,6 +23,7 @@ public class SongController {
 
     // ========== 学生端 - 新增点歌 ==========
     @PostMapping("/add")
+    @PreAuthorize("@ss.hasPermi('song:add')")
     public Result addSong(@RequestBody SongRequest songRequest, @RequestParam Long userId) {
         User user = userService.getById(userId);
         if (user == null || !"student".equals(user.getRole())) {
@@ -57,16 +57,15 @@ public class SongController {
 
     // ========== 管理端 - 查询待审核点歌 ==========
     @GetMapping("/pending")
-    public Result getPending(HttpSession session) {
-        User user = (User) session.getAttribute("user");
-        if (user == null || !"staff".equals(user.getRole())) {
-            return Result.error("无权限，需要广播站成员身份");
-        }
-        return Result.success(songService.lambdaQuery().eq(SongRequest::getStatus, "pending").list());
+    @PreAuthorize("@ss.hasPermi('song:audit')")
+    public Result getPending() {
+        return Result.success(songService.lambdaQuery()
+                .eq(SongRequest::getStatus, "pending").list());
     }
 
     // ========== 管理端 - 审核点歌 ==========
     @PutMapping("/audit/{id}")
+    @PreAuthorize("@ss.hasPermi('song:audit')")
     public Result auditSong(@PathVariable Long id,
                             @RequestParam String status,
                             @RequestParam Long userId) {
@@ -80,12 +79,14 @@ public class SongController {
 
     // ========== 管理端 - 删除点歌 ==========
     @DeleteMapping("/delete/{id}")
+    @PreAuthorize("@ss.hasPermi('song:delete')")
     public Result deleteSong(@PathVariable Long id) {
         return songService.deleteSong(id) ? Result.success("删除成功") : Result.error("删除失败");
     }
 
     // ========== 修改点歌 ==========
     @PutMapping("/update")
+    @PreAuthorize("@ss.hasPermi('song:edit')")
     public Result updateSong(@RequestBody SongRequest songRequest) {
         return songService.updateById(songRequest) ? Result.success("修改成功") : Result.error("修改失败");
     }

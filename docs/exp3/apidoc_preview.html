@@ -1,0 +1,187 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>接口文档 - 广软广播站点歌与投稿系统</title>
+<style>
+:root{--d:#1F4E79;--m:#2E75B6;--l:#DEEAF6;--bg:#f4f7fb;}
+*{box-sizing:border-box;}
+body{margin:0;font-family:"Microsoft YaHei","Segoe UI",Arial,sans-serif;color:#222;background:var(--bg);line-height:1.6;}
+header{background:linear-gradient(120deg,#1F4E79,#2E75B6);color:#fff;padding:34px 40px;}
+header h1{margin:0 0 8px;font-size:26px;}
+header .meta{font-size:14px;opacity:.92;}
+header code{background:rgba(255,255,255,.18);padding:2px 8px;border-radius:4px;font-size:13px;}
+.layout{display:flex;max-width:1280px;margin:0 auto;}
+nav{width:210px;flex:none;padding:24px 14px;position:sticky;top:0;align-self:flex-start;}
+nav a{display:block;padding:8px 12px;color:#1F4E79;text-decoration:none;border-radius:6px;font-size:14px;}
+nav a:hover{background:var(--l);}
+main{flex:1;padding:24px 30px 60px;min-width:0;}
+.gen{background:#fff;border:1px solid #d8e2ee;border-radius:10px;padding:18px 22px;margin-bottom:26px;}
+.gen h3{margin:14px 0 8px;color:var(--d);font-size:15px;}
+.gen h3:first-child{margin-top:0;}
+.gen ul{margin:6px 0;padding-left:22px;font-size:13.5px;}
+pre{background:#1e2b38;color:#e6edf5;padding:12px 14px;border-radius:8px;font-family:Consolas,"Courier New",monospace;
+ font-size:12.5px;overflow-x:auto;margin:6px 0 4px;line-height:1.5;white-space:pre-wrap;word-break:break-word;}
+h2{color:var(--d);border-left:5px solid var(--m);padding-left:10px;font-size:19px;margin:34px 0 14px;}
+.card{background:#fff;border:1px solid #d8e2ee;border-radius:10px;margin:14px 0;overflow:hidden;}
+.chead{padding:11px 16px;background:#f0f5fb;display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+.url{font-family:Consolas,monospace;font-size:13px;font-weight:bold;color:#16375a;word-break:break-all;}
+.auth{margin-left:auto;font-size:12px;color:#666;}
+.badge{font-family:Consolas,monospace;font-size:11.5px;font-weight:bold;color:#fff;padding:2px 9px;border-radius:5px;min-width:62px;text-align:center;display:inline-block;}
+.m-GET{background:#2e9e5b;}.m-POST{background:#2E75B6;}.m-PUT{background:#d39222;}.m-DELETE{background:#c0453d;}
+.cdesc{padding:10px 16px 2px;font-size:13.5px;color:#444;}
+.sub{padding:10px 16px 0;font-size:12.5px;font-weight:bold;color:var(--d);}
+table{width:100%;border-collapse:collapse;font-size:12.5px;margin:6px 16px 8px;width:calc(100% - 32px);}
+.pt{display:table;}
+th,td{border:1px solid #d3ddea;padding:6px 9px;text-align:left;vertical-align:top;}
+th{background:var(--l);color:#16375a;}
+main pre{margin:6px 16px 10px;}
+footer{text-align:center;color:#888;font-size:12.5px;padding:26px;}
+@media(max-width:860px){nav{display:none;}main{padding:16px;}}
+</style></head><body>
+<header>
+ <h1>广软广播站点歌与投稿系统 · 接口文档</h1>
+ <div class="meta">技术栈：Spring Boot 2.7 + MyBatis-Plus + MySQL 8.0 &nbsp;|&nbsp; 版本：v1.0</div>
+ <div class="meta">Base URL：<code>http://localhost:8089/api</code></div>
+</header>
+<div class="layout">
+ <nav><a href="#sec-user">用户模块</a><a href="#sec-song">点歌模块</a><a href="#sec-article">投稿模块</a><a href="#sec-audio">音频模块</a><a href="#sec-message">留言模块</a><a href="#sec-program">节目单模块</a></nav>
+ <main>
+  <div class="gen">
+   <h3>一、通用约定</h3>
+   <ul>
+    <li>接口 URL 采用“/api/模块/动作”约定，/api 为应用上下文路径；以 HTTP 方法区分操作：POST 新增/登录、GET 查询、PUT 修改/审核、DELETE 删除。</li>
+    <li>除文件上传外，请求体与响应体均为 application/json；文件上传使用 multipart/form-data。</li>
+    <li>所有接口统一返回 Result 结构：<code>{ "code": 状态码, "msg": 提示信息, "data": 业务数据 }</code>。</li>
+   </ul>
+   <h3>二、鉴权说明</h3>
+   <ul>
+    <li>系统基于 <b>HttpSession</b> 维护登录状态：登录成功后用户对象写入 Session，浏览器通过 JSESSIONID Cookie 保持会话。</li>
+    <li>需要身份的接口从 Session 读取用户（部分接口通过 userId 参数结合角色校验）；未登录返回“未登录”，角色不符返回“无权限”。</li>
+    <li>用户密码经 <b>MD5</b> 摘要后存储，数据库中不保存明文密码。</li>
+   </ul>
+   <h3>三、统一错误码</h3>
+   <table style="width:100%;margin:6px 0">
+    <tr><th>错误码</th><th>含义</th><th>触发场景</th></tr><tr><td>200</td><td>操作成功</td><td>请求正常处理完成</td></tr><tr><td>400</td><td>请求参数有误</td><td>缺少必填参数或参数格式不合法</td></tr><tr><td>401</td><td>未登录或登录已过期</td><td>Session 中无登录信息或登录状态失效</td></tr><tr><td>403</td><td>没有操作权限</td><td>角色不符，或调用了非本角色可用的接口</td></tr><tr><td>404</td><td>请求的资源不存在</td><td>访问了不存在的资源 ID 或文件</td></tr><tr><td>409</td><td>数据冲突</td><td>用户名已存在等重复数据场景</td></tr><tr><td>500</td><td>系统内部错误</td><td>服务端未预期的异常</td></tr><tr><td>1001</td><td>业务处理失败</td><td>业务流程未满足预期，如审核状态不合法</td></tr>
+   </table>
+  </div>
+  <section id="sec-user"><h2>用户模块</h2><div class="card" id="ep-1"><div class="chead"><span class="badge m-POST">POST</span><span class="url">/user/register</span><span class="auth">鉴权：否</span></div><div class="cdesc">用户注册，密码经 MD5 加密后存储</div><div class="sub">请求参数</div><table class="pt"><tr><th>位置</th><th>参数</th><th>类型</th><th>必填</th><th>说明</th></tr><tr><td>body</td><td>username</td><td>String</td><td>是</td><td>登录账号，唯一</td></tr><tr><td>body</td><td>password</td><td>String</td><td>是</td><td>登录密码</td></tr><tr><td>body</td><td>role</td><td>String</td><td>是</td><td>角色：student/staff/teacher</td></tr><tr><td>body</td><td>realName</td><td>String</td><td>否</td><td>真实姓名</td></tr><tr><td>body</td><td>studentId</td><td>String</td><td>否</td><td>学号</td></tr><tr><td>body</td><td>phone</td><td>String</td><td>否</td><td>联系电话</td></tr><tr><td>body</td><td>email</td><td>String</td><td>否</td><td>邮箱</td></tr></table><div class="sub">请求示例</div><pre>{
+  &quot;username&quot;: &quot;student1&quot;,
+  &quot;password&quot;: &quot;123456&quot;,
+  &quot;realName&quot;: &quot;张一&quot;,
+  &quot;studentId&quot;: &quot;2024001&quot;,
+  &quot;role&quot;: &quot;student&quot;,
+  &quot;phone&quot;: &quot;13800000001&quot;,
+  &quot;email&quot;: &quot;student1@example.com&quot;
+}</pre><div class="sub">响应示例</div><pre>{
+  &quot;code&quot;: 200,
+  &quot;msg&quot;: &quot;注册成功&quot;,
+  &quot;data&quot;: null
+}</pre></div><div class="card" id="ep-2"><div class="chead"><span class="badge m-POST">POST</span><span class="url">/user/login</span><span class="auth">鉴权：否</span></div><div class="cdesc">用户登录，校验通过后用户信息写入 HttpSession，响应头返回 JSESSIONID Cookie</div><div class="sub">请求参数</div><table class="pt"><tr><th>位置</th><th>参数</th><th>类型</th><th>必填</th><th>说明</th></tr><tr><td>body</td><td>username</td><td>String</td><td>是</td><td>登录账号</td></tr><tr><td>body</td><td>password</td><td>String</td><td>是</td><td>登录密码</td></tr></table><div class="sub">请求示例</div><pre>{
+  &quot;username&quot;: &quot;student1&quot;,
+  &quot;password&quot;: &quot;123456&quot;
+}</pre><div class="sub">响应示例</div><pre>{
+  &quot;code&quot;: 200,
+  &quot;msg&quot;: &quot;success&quot;,
+  &quot;data&quot;: {
+    &quot;id&quot;: 1,
+    &quot;username&quot;: &quot;student1&quot;,
+    &quot;realName&quot;: &quot;张一&quot;,
+    &quot;role&quot;: &quot;student&quot;,
+    &quot;status&quot;: 1
+  }
+}</pre></div><div class="card" id="ep-3"><div class="chead"><span class="badge m-GET">GET</span><span class="url">/user/info</span><span class="auth">鉴权：是</span></div><div class="cdesc">获取当前登录用户信息，从 Session 读取</div><div class="sub">响应示例</div><pre>{
+  &quot;code&quot;: 200,
+  &quot;msg&quot;: &quot;success&quot;,
+  &quot;data&quot;: { &quot;id&quot;: 1, &quot;username&quot;: &quot;student1&quot;, &quot;role&quot;: &quot;student&quot; }
+}</pre></div><div class="card" id="ep-4"><div class="chead"><span class="badge m-POST">POST</span><span class="url">/user/logout</span><span class="auth">鉴权：是</span></div><div class="cdesc">退出登录，清除 Session 中的用户信息</div><div class="sub">响应示例</div><pre>{
+  &quot;code&quot;: 200,
+  &quot;msg&quot;: &quot;退出成功&quot;,
+  &quot;data&quot;: null
+}</pre></div></section><section id="sec-song"><h2>点歌模块</h2><div class="card" id="ep-5"><div class="chead"><span class="badge m-POST">POST</span><span class="url">/song/add?userId={userId}</span><span class="auth">鉴权：学生</span></div><div class="cdesc">学生提交点歌申请，初始状态为 pending</div><div class="sub">请求参数</div><table class="pt"><tr><th>位置</th><th>参数</th><th>类型</th><th>必填</th><th>说明</th></tr><tr><td>query</td><td>userId</td><td>Long</td><td>是</td><td>学生用户ID</td></tr><tr><td>body</td><td>songName</td><td>String</td><td>是</td><td>歌曲名称</td></tr><tr><td>body</td><td>singer</td><td>String</td><td>是</td><td>歌手</td></tr><tr><td>body</td><td>message</td><td>String</td><td>否</td><td>点歌留言</td></tr></table><div class="sub">请求示例</div><pre>?userId=1
+{
+  &quot;songName&quot;: &quot;晴天&quot;,
+  &quot;singer&quot;: &quot;周杰伦&quot;,
+  &quot;message&quot;: &quot;午间时段播放，谢谢广播站！&quot;
+}</pre><div class="sub">响应示例</div><pre>{
+  &quot;code&quot;: 200,
+  &quot;msg&quot;: &quot;提交成功&quot;,
+  &quot;data&quot;: null
+}</pre></div><div class="card" id="ep-6"><div class="chead"><span class="badge m-GET">GET</span><span class="url">/song/my?userId={userId}</span><span class="auth">鉴权：是</span></div><div class="cdesc">查询本人的点歌记录</div><div class="sub">请求参数</div><table class="pt"><tr><th>位置</th><th>参数</th><th>类型</th><th>必填</th><th>说明</th></tr><tr><td>query</td><td>userId</td><td>Long</td><td>是</td><td>学生用户ID</td></tr></table><div class="sub">响应示例</div><pre>{
+  &quot;code&quot;: 200,
+  &quot;msg&quot;: &quot;success&quot;,
+  &quot;data&quot;: [ { &quot;id&quot;: 1, &quot;songName&quot;: &quot;晴天&quot;, &quot;status&quot;: &quot;approved&quot; } ]
+}</pre></div><div class="card" id="ep-7"><div class="chead"><span class="badge m-GET">GET</span><span class="url">/song/list</span><span class="auth">鉴权：是</span></div><div class="cdesc">查询全部点歌（LEFT JOIN user 返回学生信息）</div><div class="sub">响应示例</div><pre>{
+  &quot;code&quot;: 200,
+  &quot;msg&quot;: &quot;success&quot;,
+  &quot;data&quot;: [ { &quot;id&quot;: 1, &quot;songName&quot;: &quot;晴天&quot;, &quot;singer&quot;: &quot;周杰伦&quot;, &quot;username&quot;: &quot;student1&quot;, &quot;status&quot;: &quot;approved&quot; } ]
+}</pre></div><div class="card" id="ep-8"><div class="chead"><span class="badge m-GET">GET</span><span class="url">/song/detail/{id}</span><span class="auth">鉴权：是</span></div><div class="cdesc">按ID查询点歌详情</div><div class="sub">请求参数</div><table class="pt"><tr><th>位置</th><th>参数</th><th>类型</th><th>必填</th><th>说明</th></tr><tr><td>path</td><td>id</td><td>Long</td><td>是</td><td>点歌单ID</td></tr></table></div><div class="card" id="ep-9"><div class="chead"><span class="badge m-GET">GET</span><span class="url">/song/pending</span><span class="auth">鉴权：广播站成员</span></div><div class="cdesc">查询待审核点歌，从 Session 校验 staff 角色</div><div class="sub">响应示例</div><pre>{
+  &quot;code&quot;: 200,
+  &quot;msg&quot;: &quot;success&quot;,
+  &quot;data&quot;: [ { &quot;id&quot;: 2, &quot;songName&quot;: &quot;稻香&quot;, &quot;status&quot;: &quot;pending&quot; } ]
+}</pre></div><div class="card" id="ep-10"><div class="chead"><span class="badge m-PUT">PUT</span><span class="url">/song/audit/{id}?status={status}&amp;userId={userId}</span><span class="auth">鉴权：广播站成员</span></div><div class="cdesc">审核点歌，记录审核结果与审核时间</div><div class="sub">请求参数</div><table class="pt"><tr><th>位置</th><th>参数</th><th>类型</th><th>必填</th><th>说明</th></tr><tr><td>path</td><td>id</td><td>Long</td><td>是</td><td>点歌单ID</td></tr><tr><td>query</td><td>status</td><td>String</td><td>是</td><td>审核结果：approved/rejected</td></tr><tr><td>query</td><td>userId</td><td>Long</td><td>是</td><td>操作成员ID</td></tr></table><div class="sub">请求示例</div><pre>PUT /song/audit/2?status=approved&amp;userId=3</pre><div class="sub">响应示例</div><pre>{
+  &quot;code&quot;: 200,
+  &quot;msg&quot;: &quot;审核完成&quot;,
+  &quot;data&quot;: null
+}</pre></div><div class="card" id="ep-11"><div class="chead"><span class="badge m-DELETE">DELETE</span><span class="url">/song/delete/{id}</span><span class="auth">鉴权：是</span></div><div class="cdesc">按ID删除点歌</div><div class="sub">请求参数</div><table class="pt"><tr><th>位置</th><th>参数</th><th>类型</th><th>必填</th><th>说明</th></tr><tr><td>path</td><td>id</td><td>Long</td><td>是</td><td>点歌单ID</td></tr></table><div class="sub">响应示例</div><pre>{
+  &quot;code&quot;: 200,
+  &quot;msg&quot;: &quot;删除成功&quot;,
+  &quot;data&quot;: null
+}</pre></div><div class="card" id="ep-12"><div class="chead"><span class="badge m-PUT">PUT</span><span class="url">/song/update</span><span class="auth">鉴权：是</span></div><div class="cdesc">修改点歌信息</div><div class="sub">请求参数</div><table class="pt"><tr><th>位置</th><th>参数</th><th>类型</th><th>必填</th><th>说明</th></tr><tr><td>body</td><td>SongRequest</td><td>Object</td><td>是</td><td>点歌单完整对象（须含 id）</td></tr></table><div class="sub">请求示例</div><pre>{
+  &quot;id&quot;: 2,
+  &quot;songName&quot;: &quot;稻香&quot;,
+  &quot;singer&quot;: &quot;周杰伦&quot;,
+  &quot;status&quot;: &quot;pending&quot;
+}</pre></div><div class="card" id="ep-13"><div class="chead"><span class="badge m-GET">GET</span><span class="url">/song/search?keyword={keyword}&amp;status={status}</span><span class="auth">鉴权：否</span></div><div class="cdesc">按歌曲名/歌手关键字与状态组合搜索，按申请时间倒序</div><div class="sub">请求参数</div><table class="pt"><tr><th>位置</th><th>参数</th><th>类型</th><th>必填</th><th>说明</th></tr><tr><td>query</td><td>keyword</td><td>String</td><td>否</td><td>歌曲名或歌手关键字</td></tr><tr><td>query</td><td>status</td><td>String</td><td>否</td><td>审核状态</td></tr></table></div></section><section id="sec-article"><h2>投稿模块</h2><div class="card" id="ep-14"><div class="chead"><span class="badge m-POST">POST</span><span class="url">/article/add?userId={userId}</span><span class="auth">鉴权：学生</span></div><div class="cdesc">提交投稿文章</div><div class="sub">请求参数</div><table class="pt"><tr><th>位置</th><th>参数</th><th>类型</th><th>必填</th><th>说明</th></tr><tr><td>query</td><td>userId</td><td>Long</td><td>是</td><td>学生用户ID</td></tr><tr><td>body</td><td>title</td><td>String</td><td>是</td><td>标题</td></tr><tr><td>body</td><td>content</td><td>String</td><td>是</td><td>正文内容</td></tr><tr><td>body</td><td>type</td><td>String</td><td>是</td><td>类型：news/story/poem</td></tr></table><div class="sub">请求示例</div><pre>?userId=1
+{
+  &quot;title&quot;: &quot;青春飞扬，梦想起航&quot;,
+  &quot;content&quot;: &quot;九月，我们怀揣梦想走进广软校园……&quot;,
+  &quot;type&quot;: &quot;poem&quot;
+}</pre><div class="sub">响应示例</div><pre>{
+  &quot;code&quot;: 200,
+  &quot;msg&quot;: &quot;投稿成功&quot;,
+  &quot;data&quot;: null
+}</pre></div><div class="card" id="ep-15"><div class="chead"><span class="badge m-GET">GET</span><span class="url">/article/search?title={title}&amp;status={status}</span><span class="auth">鉴权：否</span></div><div class="cdesc">按标题与状态搜索稿件</div><div class="sub">请求参数</div><table class="pt"><tr><th>位置</th><th>参数</th><th>类型</th><th>必填</th><th>说明</th></tr><tr><td>query</td><td>title</td><td>String</td><td>否</td><td>标题关键字</td></tr><tr><td>query</td><td>status</td><td>String</td><td>否</td><td>审核状态</td></tr></table></div><div class="card" id="ep-16"><div class="chead"><span class="badge m-PUT">PUT</span><span class="url">/article/update</span><span class="auth">鉴权：是</span></div><div class="cdesc">修改稿件</div><div class="sub">请求参数</div><table class="pt"><tr><th>位置</th><th>参数</th><th>类型</th><th>必填</th><th>说明</th></tr><tr><td>body</td><td>Article</td><td>Object</td><td>是</td><td>稿件完整对象（须含 id）</td></tr></table></div><div class="card" id="ep-17"><div class="chead"><span class="badge m-GET">GET</span><span class="url">/article/detail/{id}</span><span class="auth">鉴权：否</span></div><div class="cdesc">按ID查询稿件详情</div><div class="sub">请求参数</div><table class="pt"><tr><th>位置</th><th>参数</th><th>类型</th><th>必填</th><th>说明</th></tr><tr><td>path</td><td>id</td><td>Long</td><td>是</td><td>稿件ID</td></tr></table></div><div class="card" id="ep-18"><div class="chead"><span class="badge m-DELETE">DELETE</span><span class="url">/article/delete/{id}</span><span class="auth">鉴权：是</span></div><div class="cdesc">按ID删除稿件</div><div class="sub">请求参数</div><table class="pt"><tr><th>位置</th><th>参数</th><th>类型</th><th>必填</th><th>说明</th></tr><tr><td>path</td><td>id</td><td>Long</td><td>是</td><td>稿件ID</td></tr></table></div><div class="card" id="ep-19"><div class="chead"><span class="badge m-PUT">PUT</span><span class="url">/article/audit/{id}?status={status}&amp;userId={userId}</span><span class="auth">鉴权：广播站成员</span></div><div class="cdesc">审核稿件，记录审核结果与时间</div><div class="sub">请求参数</div><table class="pt"><tr><th>位置</th><th>参数</th><th>类型</th><th>必填</th><th>说明</th></tr><tr><td>path</td><td>id</td><td>Long</td><td>是</td><td>稿件ID</td></tr><tr><td>query</td><td>status</td><td>String</td><td>是</td><td>approved/rejected</td></tr><tr><td>query</td><td>userId</td><td>Long</td><td>是</td><td>操作成员ID</td></tr></table><div class="sub">请求示例</div><pre>PUT /article/audit/2?status=approved&amp;userId=3</pre><div class="sub">响应示例</div><pre>{
+  &quot;code&quot;: 200,
+  &quot;msg&quot;: &quot;审核完成&quot;,
+  &quot;data&quot;: null
+}</pre></div><div class="card" id="ep-20"><div class="chead"><span class="badge m-GET">GET</span><span class="url">/article/list</span><span class="auth">鉴权：否</span></div><div class="cdesc">查询全部稿件</div></div><div class="card" id="ep-21"><div class="chead"><span class="badge m-GET">GET</span><span class="url">/article/pending</span><span class="auth">鉴权：广播站成员</span></div><div class="cdesc">查询待审核稿件</div></div></section><section id="sec-audio"><h2>音频模块</h2><div class="card" id="ep-22"><div class="chead"><span class="badge m-POST">POST</span><span class="url">/audio/upload</span><span class="auth">鉴权：广播站成员</span></div><div class="cdesc">上传节目音频（multipart/form-data），文件以 UUID 重命名存储，数据库保存元数据</div><div class="sub">请求参数</div><table class="pt"><tr><th>位置</th><th>参数</th><th>类型</th><th>必填</th><th>说明</th></tr><tr><td>form</td><td>file</td><td>File</td><td>是</td><td>音频文件，大小不超过 50MB</td></tr><tr><td>form</td><td>title</td><td>String</td><td>是</td><td>音频标题</td></tr><tr><td>form</td><td>userId</td><td>Long</td><td>是</td><td>操作成员ID</td></tr></table><div class="sub">请求示例</div><pre>Content-Type: multipart/form-data
+file: &lt;音频文件&gt;
+title: 晴天
+userId: 3</pre><div class="sub">响应示例</div><pre>{
+  &quot;code&quot;: 200,
+  &quot;msg&quot;: &quot;上传成功&quot;,
+  &quot;data&quot;: null
+}</pre></div><div class="card" id="ep-23"><div class="chead"><span class="badge m-GET">GET</span><span class="url">/audio/download/{id}</span><span class="auth">鉴权：否</span></div><div class="cdesc">按ID下载音频文件（二进制流）</div><div class="sub">请求参数</div><table class="pt"><tr><th>位置</th><th>参数</th><th>类型</th><th>必填</th><th>说明</th></tr><tr><td>path</td><td>id</td><td>Long</td><td>是</td><td>音频ID</td></tr></table><div class="sub">响应示例</div><pre>响应为 application/octet_stream 二进制文件流</pre></div><div class="card" id="ep-24"><div class="chead"><span class="badge m-GET">GET</span><span class="url">/audio/list</span><span class="auth">鉴权：否</span></div><div class="cdesc">查询在线音频（status=1，按上传时间倒序）</div><div class="sub">响应示例</div><pre>{
+  &quot;code&quot;: 200,
+  &quot;msg&quot;: &quot;success&quot;,
+  &quot;data&quot;: [ { &quot;id&quot;: 1, &quot;title&quot;: &quot;晴天&quot;, &quot;playCount&quot;: 35, &quot;duration&quot;: 269 } ]
+}</pre></div><div class="card" id="ep-25"><div class="chead"><span class="badge m-DELETE">DELETE</span><span class="url">/audio/delete/{id}</span><span class="auth">鉴权：广播站成员</span></div><div class="cdesc">按ID删除音频</div><div class="sub">请求参数</div><table class="pt"><tr><th>位置</th><th>参数</th><th>类型</th><th>必填</th><th>说明</th></tr><tr><td>path</td><td>id</td><td>Long</td><td>是</td><td>音频ID</td></tr></table></div></section><section id="sec-message"><h2>留言模块</h2><div class="card" id="ep-26"><div class="chead"><span class="badge m-POST">POST</span><span class="url">/message/add?userId={userId}</span><span class="auth">鉴权：是</span></div><div class="cdesc">发表留言</div><div class="sub">请求参数</div><table class="pt"><tr><th>位置</th><th>参数</th><th>类型</th><th>必填</th><th>说明</th></tr><tr><td>query</td><td>userId</td><td>Long</td><td>是</td><td>留言用户ID</td></tr><tr><td>body</td><td>content</td><td>String</td><td>是</td><td>留言内容</td></tr></table><div class="sub">请求示例</div><pre>?userId=1
+{
+  &quot;content&quot;: &quot;广播站的节目越来越精彩了！希望多放一些流行歌曲。&quot;
+}</pre><div class="sub">响应示例</div><pre>{
+  &quot;code&quot;: 200,
+  &quot;msg&quot;: &quot;留言成功&quot;,
+  &quot;data&quot;: null
+}</pre></div><div class="card" id="ep-27"><div class="chead"><span class="badge m-DELETE">DELETE</span><span class="url">/message/delete/{id}</span><span class="auth">鉴权：广播站成员</span></div><div class="cdesc">按ID删除留言</div><div class="sub">请求参数</div><table class="pt"><tr><th>位置</th><th>参数</th><th>类型</th><th>必填</th><th>说明</th></tr><tr><td>path</td><td>id</td><td>Long</td><td>是</td><td>留言ID</td></tr></table></div><div class="card" id="ep-28"><div class="chead"><span class="badge m-PUT">PUT</span><span class="url">/message/reply/{id}?reply={reply}&amp;userId={userId}</span><span class="auth">鉴权：广播站成员</span></div><div class="cdesc">回复留言</div><div class="sub">请求参数</div><table class="pt"><tr><th>位置</th><th>参数</th><th>类型</th><th>必填</th><th>说明</th></tr><tr><td>path</td><td>id</td><td>Long</td><td>是</td><td>留言ID</td></tr><tr><td>query</td><td>reply</td><td>String</td><td>是</td><td>回复内容</td></tr><tr><td>query</td><td>userId</td><td>Long</td><td>是</td><td>操作成员ID</td></tr></table><div class="sub">请求示例</div><pre>PUT /message/reply/1?reply=感谢支持，本周午间已安排流行专场&amp;userId=3</pre><div class="sub">响应示例</div><pre>{
+  &quot;code&quot;: 200,
+  &quot;msg&quot;: &quot;回复成功&quot;,
+  &quot;data&quot;: null
+}</pre></div><div class="card" id="ep-29"><div class="chead"><span class="badge m-GET">GET</span><span class="url">/message/search?content={content}</span><span class="auth">鉴权：否</span></div><div class="cdesc">按内容关键字搜索留言</div><div class="sub">请求参数</div><table class="pt"><tr><th>位置</th><th>参数</th><th>类型</th><th>必填</th><th>说明</th></tr><tr><td>query</td><td>content</td><td>String</td><td>是</td><td>关键字</td></tr></table></div><div class="card" id="ep-30"><div class="chead"><span class="badge m-GET">GET</span><span class="url">/message/list</span><span class="auth">鉴权：否</span></div><div class="cdesc">查询留言列表（含回复，按时间倒序）</div><div class="sub">响应示例</div><pre>{
+  &quot;code&quot;: 200,
+  &quot;msg&quot;: &quot;success&quot;,
+  &quot;data&quot;: [ { &quot;id&quot;: 1, &quot;content&quot;: &quot;节目越来越精彩了！&quot;, &quot;reply&quot;: &quot;感谢支持&quot; } ]
+}</pre></div></section><section id="sec-program"><h2>节目单模块</h2><div class="card" id="ep-31"><div class="chead"><span class="badge m-POST">POST</span><span class="url">/program/publish?userId={userId}</span><span class="auth">鉴权：广播站成员</span></div><div class="cdesc">发布节目单，状态置为 published 并记录发布时间</div><div class="sub">请求参数</div><table class="pt"><tr><th>位置</th><th>参数</th><th>类型</th><th>必填</th><th>说明</th></tr><tr><td>query</td><td>userId</td><td>Long</td><td>是</td><td>操作成员ID</td></tr><tr><td>body</td><td>date</td><td>Date</td><td>是</td><td>节目日期，如 2026-09-21</td></tr><tr><td>body</td><td>timeSlot</td><td>String</td><td>是</td><td>时间段，如 12:00-12:30</td></tr><tr><td>body</td><td>programName</td><td>String</td><td>是</td><td>节目名称</td></tr><tr><td>body</td><td>content</td><td>String</td><td>否</td><td>节目内容</td></tr><tr><td>body</td><td>songs</td><td>String</td><td>否</td><td>播放歌单快照</td></tr></table><div class="sub">请求示例</div><pre>?userId=3
+{
+  &quot;date&quot;: &quot;2026-09-21&quot;,
+  &quot;timeSlot&quot;: &quot;12:00-12:30&quot;,
+  &quot;programName&quot;: &quot;音乐午高峰&quot;,
+  &quot;content&quot;: &quot;流行音乐点播与祝福放送。&quot;,
+  &quot;songs&quot;: &quot;晴天；夜曲；兰亭序&quot;
+}</pre><div class="sub">响应示例</div><pre>{
+  &quot;code&quot;: 200,
+  &quot;msg&quot;: &quot;发布成功&quot;,
+  &quot;data&quot;: null
+}</pre></div><div class="card" id="ep-32"><div class="chead"><span class="badge m-DELETE">DELETE</span><span class="url">/program/delete/{id}</span><span class="auth">鉴权：广播站成员</span></div><div class="cdesc">按ID删除节目单</div><div class="sub">请求参数</div><table class="pt"><tr><th>位置</th><th>参数</th><th>类型</th><th>必填</th><th>说明</th></tr><tr><td>path</td><td>id</td><td>Long</td><td>是</td><td>节目单ID</td></tr></table></div><div class="card" id="ep-33"><div class="chead"><span class="badge m-GET">GET</span><span class="url">/program/list</span><span class="auth">鉴权：否</span></div><div class="cdesc">查询全部节目单</div></div><div class="card" id="ep-34"><div class="chead"><span class="badge m-PUT">PUT</span><span class="url">/program/update</span><span class="auth">鉴权：广播站成员</span></div><div class="cdesc">修改节目单</div><div class="sub">请求参数</div><table class="pt"><tr><th>位置</th><th>参数</th><th>类型</th><th>必填</th><th>说明</th></tr><tr><td>body</td><td>ProgramSchedule</td><td>Object</td><td>是</td><td>节目单完整对象（须含 id）</td></tr></table></div><div class="card" id="ep-35"><div class="chead"><span class="badge m-GET">GET</span><span class="url">/program/detail/{id}</span><span class="auth">鉴权：否</span></div><div class="cdesc">按ID查询节目单详情</div><div class="sub">请求参数</div><table class="pt"><tr><th>位置</th><th>参数</th><th>类型</th><th>必填</th><th>说明</th></tr><tr><td>path</td><td>id</td><td>Long</td><td>是</td><td>节目单ID</td></tr></table></div><div class="card" id="ep-36"><div class="chead"><span class="badge m-GET">GET</span><span class="url">/program/search?programName={programName}&amp;date={date}</span><span class="auth">鉴权：否</span></div><div class="cdesc">按节目名称与日期搜索节目单</div><div class="sub">请求参数</div><table class="pt"><tr><th>位置</th><th>参数</th><th>类型</th><th>必填</th><th>说明</th></tr><tr><td>query</td><td>programName</td><td>String</td><td>否</td><td>节目名称关键字</td></tr><tr><td>query</td><td>date</td><td>Date</td><td>否</td><td>节目日期</td></tr></table></div></section>
+ </main>
+</div>
+<footer>广软广播站点歌与投稿系统 接口文档 · 共 36 个接口</footer>
+</body></html>

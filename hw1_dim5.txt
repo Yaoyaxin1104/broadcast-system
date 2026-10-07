@@ -1,0 +1,685 @@
+# Dimension 5: table structure
+source: F:\学号-姓名-作业1-Web应用项目需求分析与系统设计报告.docx
+location_base: /word/document.xml/w:body/
+syntax: [T<n>] starts a table, [R<n>] a row, and [C<n>] a cell; listed defaults apply when omitted; null means unset/inherited.
+table_defaults: borders=w:tblBorders(w:top(w:val="single",w:color="auto",w:sz="4",w:space="0"),w:left(w:val="single",w:color="auto",w:sz="4",w:space="0"),w:bottom(w:val="single",w:color="auto",w:sz="4",w:space="0"),w:right(w:val="single",w:color="auto",w:sz="4",w:space="0"),w:insideH(w:val="single",w:color="auto",w:sz="4",w:space="0"),w:insideV(w:val="single",w:color="auto",w:sz="4",w:space="0")), cell_margin=w:tblCellMar(w:top(w:w="0",w:type="dxa"),w:left(w:w="108",w:type="dxa"),w:bottom(w:w="0",w:type="dxa"),w:right(w:w="108",w:type="dxa")), nesting_level=0, part="word/document.xml", section_index=1, style="34", width={"w":"0","type":"auto"}
+row_defaults: none
+cell_defaults: paragraphs=1
+definitions: @v1 cell.width={"w":"1020","type":"dxa"}; @v2 cell.shading={"val":"clear","color":"auto","fill":"D9D9D9"}; @v3 cell.width={"w":"1587","type":"dxa"}; @v4 cell.width={"w":"4309","type":"dxa"}; @v5 cell.width={"w":"1417","type":"dxa"}; @v6 cell.width={"w":"1701","type":"dxa"}; @v7 cell.width={"w":"6633","type":"dxa"}; @v8 cell.width={"w":"794","type":"dxa"}; @v9 cell.width={"w":"1304","type":"dxa"}; @v10 cell.width={"w":"3572","type":"dxa"}; @v11 cell.width={"w":"850","type":"dxa"}; @v12 cell.width={"w":"1191","type":"dxa"}; @v13 cell.width={"w":"1984","type":"dxa"}; @v14 cell.width={"w":"3061","type":"dxa"}; @v15 cell.width={"w":"2324","type":"dxa"}; @v16 cell.width={"w":"3912","type":"dxa"}; @v17 cell.width={"w":"3005","type":"dxa"}; @v18 cell.width={"w":"964","type":"dxa"}; @v19 cell.width={"w":"1247","type":"dxa"}; @v20 cell.width={"w":"2494","type":"dxa"}; @v21 cell.width={"w":"2438","type":"dxa"}; @v22 cell.width={"w":"1361","type":"dxa"}; @v23 cell.width={"w":"2608","type":"dxa"}; @v24 cell.width={"w":"4365","type":"dxa"}; @v25 cell.width={"w":"2381","type":"dxa"}; @v26 cell.width={"w":"1871","type":"dxa"}; @v27 cell.width={"w":"3175","type":"dxa"}; @v28 cell.width={"w":"2551","type":"dxa"}; @v29 cell.width={"w":"737","type":"dxa"}
+text_policy: full text is emitted without truncation.
+omitted: record_type=table; repeated defaults; table text because it is the ordered concatenation of cell text; raw table XML.
+normalized: loc is relative to location_base; @v references definitions; border and margin XML are losslessly compacted by tag and attributes.
+
+[T1 loc=49 grid=[{"w":"1020"},{"w":"1587"},{"w":"4309"},{"w":"1417"}]]
+
+[R1]
+[C1 width=@v1 shading=@v2]
+章
+[C2 width=@v3 shading=@v2]
+章节名称
+[C3 width=@v4 shading=@v2]
+主要内容
+[C4 width=@v5 shading=@v2]
+对应课程进度
+
+[R2]
+[C1 width=@v1]
+第1章
+[C2 width=@v3]
+绪论
+[C3 width=@v4]
+项目背景与意义、国内外同类系统现状、本文主要工作
+[C4 width=@v5]
+第1讲
+
+[R3]
+[C1 width=@v1]
+第3章
+[C2 width=@v3]
+系统分析
+[C3 width=@v4]
+可行性分析、业务分析、功能需求（含模块图/用例图/时序图）、非功能需求
+[C4 width=@v5]
+第1、2讲
+
+[R4]
+[C1 width=@v1]
+第4章
+[C2 width=@v3]
+系统设计
+[C3 width=@v4]
+总体架构、功能模块与接口设计、数据库设计
+[C4 width=@v5]
+第5、7讲
+
+[T2 loc=51 grid=[{"w":"1701"},{"w":"6633"}]]
+
+[R1]
+[C1 width=@v6 shading=@v2]
+项目
+[C2 width=@v7 shading=@v2]
+说明
+
+[R2]
+[C1 width=@v6]
+文档命名
+[C2 width=@v7]
+学号-姓名-作业1-Web应用项目需求分析与系统设计报告.docx
+
+[R3]
+[C1 width=@v6]
+提交格式
+[C2 width=@v7]
+Word文档（.docx）；图表须嵌入正文，不得以超链接形式外链
+
+[R4]
+[C1 width=@v6]
+提交路径
+[C2 width=@v7]
+智慧树平台对应作业入口
+
+[R5]
+[C1 width=@v6]
+作业周期
+[C2 width=@v7]
+2周（具体查看智慧树提交时间）
+
+[R6]
+[C1 width=@v6]
+附件要求
+[C2 width=@v7]
+接口文档html页面及资源（提交ftp，命名格式学号-姓名，压缩包）
+
+[T3 loc=83 grid=[{"w":"794"},{"w":"1304"},{"w":"1587"},{"w":"3572"},{"w":"850"}]]
+
+[R1]
+[C1 width=@v8 shading=@v2]
+编号
+[C2 width=@v9 shading=@v2]
+模块
+[C3 width=@v3 shading=@v2]
+功能名称
+[C4 width=@v10 shading=@v2]
+功能说明
+[C5 width=@v11 shading=@v2]
+优先级
+
+[R2]
+[C1 width=@v8]
+F-01
+[C2 width=@v9]
+用户管理
+[C3 width=@v3]
+用户注册
+[C4 width=@v10]
+提交用户名、密码、邮箱完成注册，密码加密存储
+[C5 width=@v11]
+M
+
+[R3]
+[C1 width=@v8]
+F-02
+[C2 width=@v9]
+用户管理
+[C3 width=@v3]
+用户登录
+[C4 width=@v10]
+校验用户名与密码，成功后签发访问令牌
+[C5 width=@v11]
+M
+
+[R4]
+[C1 width=@v8]
+F-03
+[C2 width=@v9]
+用户管理
+[C3 width=@v3]
+查看个人信息
+[C4 width=@v10]
+登录用户查看本人资料，需鉴权
+[C5 width=@v11]
+M
+
+[R5]
+[C1 width=@v8]
+F-04
+[C2 width=@v9]
+用户管理
+[C3 width=@v3]
+修改个人信息
+[C4 width=@v10]
+修改昵称、邮箱等，需鉴权
+[C5 width=@v11]
+S
+
+[R6]
+[C1 width=@v8]
+F-05
+[C2 width=@v9]
+（模块）
+[C3 width=@v3]
+（填写）
+[C4 width=@v10]
+（填写）
+[C5 width=@v11]
+M
+
+[R7]
+[C1 width=@v8]
+F-06
+[C2 width=@v9]
+（模块）
+[C3 width=@v3]
+（填写）
+[C4 width=@v10]
+（填写）
+[C5 width=@v11]
+S
+
+[R8]
+[C1 width=@v8]
+F-07
+[C2 width=@v9]
+系统支撑
+[C3 width=@v3]
+权限配置
+[C4 width=@v10]
+管理员配置角色与权限
+[C5 width=@v11]
+S
+
+[R9]
+[C1 width=@v8]
+F-08
+[C2 width=@v9]
+系统支撑
+[C3 width=@v3]
+操作日志
+[C4 width=@v10]
+记录关键操作痕迹，便于问题追溯
+[C5 width=@v11]
+S
+
+[R10]
+[C1 width=@v8]
+F-09
+[C2 width=@v9]
+统计报表
+[C3 width=@v3]
+数据统计
+[C4 width=@v10]
+按条件统计业务数据并生成报表
+[C5 width=@v11]
+C
+
+[R11]
+[C1 width=@v8]
+F-10
+[C2 width=@v9]
+——
+[C3 width=@v3]
+多校区通借通还
+[C4 width=@v10]
+本次不实现，列入后续版本规划
+[C5 width=@v11]
+W
+
+[T4 loc=96 grid=[{"w":"1185"},{"w":"1974"},{"w":"3054"},{"w":"2315"}]]
+
+[R1]
+[C1 width=@v12 shading=@v2]
+类别
+[C2 width=@v13 shading=@v2]
+需求描述
+[C3 width=@v14 shading=@v2]
+量化指标
+[C4 width=@v15 shading=@v2]
+验证方式
+
+[R2]
+[C1 width=@v12]
+性能
+[C2 width=@v13]
+页面与接口响应速度
+[C3 width=@v14]
+首屏加载≤2秒；核心接口P95≤500ms
+[C4 width=@v15]
+浏览器开发者工具、接口工具耗时统计
+
+[R3]
+[C1 width=@v12]
+性能
+[C2 width=@v13]
+并发承载能力
+[C3 width=@v14]
+支持200并发用户在线操作
+[C4 width=@v15]
+压力测试工具（如JMeter）
+
+[R4]
+[C1 width=@v12]
+安全
+[C2 width=@v13]
+密码存储
+[C3 width=@v14]
+使用BCrypt加密存储，禁止明文与裸哈希
+[C4 width=@v15]
+检查数据库字段内容
+
+[R5]
+[C1 width=@v12]
+安全
+[C2 width=@v13]
+登录防护
+[C3 width=@v14]
+登录失败5次锁定10分钟
+[C4 width=@v15]
+构造连续失败请求验证
+
+[R6]
+[C1 width=@v12]
+安全
+[C2 width=@v13]
+越权防护
+[C3 width=@v14]
+水平越权访问返回403
+[C4 width=@v15]
+以用户A的令牌访问用户B的数据
+
+[R7]
+[C1 width=@v12]
+可用性
+[C2 width=@v13]
+浏览器兼容
+[C3 width=@v14]
+支持Chrome/Edge/Firefox最新两个大版本
+[C4 width=@v15]
+主流浏览器实测
+
+[R8]
+[C1 width=@v12]
+兼容性
+[C2 width=@v13]
+分辨率适配
+[C3 width=@v14]
+最低支持1366×768，响应式布局无横向滚动条
+[C4 width=@v15]
+调整浏览器窗口尺寸实测
+
+[R9]
+[C1 width=@v12]
+可维护性
+[C2 width=@v13]
+代码规范
+[C3 width=@v14]
+分层清晰、关键逻辑有注释、日志可追溯
+[C4 width=@v15]
+代码评审
+
+[T5 loc=102 grid=[{"w":"1417"},{"w":"3912"},{"w":"3005"}]]
+
+[R1]
+[C1 width=@v5 shading=@v2]
+层次
+[C2 width=@v16 shading=@v2]
+职责
+[C3 width=@v17 shading=@v2]
+关键实现
+
+[R2]
+[C1 width=@v5]
+Controller层
+[C2 width=@v16]
+接收请求、参数校验、调用Service、包装统一返回
+[C3 width=@v17]
+@RestController、@Valid、Result<T>
+
+[R3]
+[C1 width=@v5]
+Service层
+[C2 width=@v16]
+业务逻辑、事务控制、模型转换（BO/PO/DTO）
+[C3 width=@v17]
+@Service、@Transactional
+
+[R4]
+[C1 width=@v5]
+Mapper层
+[C2 width=@v16]
+数据访问，提供基础CRUD能力
+[C3 width=@v17]
+MyBatis-PlusBaseMapper、MapperXML
+
+[R5]
+[C1 width=@v5]
+公共模块
+[C2 width=@v16]
+统一返回结构、错误码枚举、全局异常处理
+[C3 width=@v17]
+Result<T>、ErrorCodeEnum、GlobalExceptionHandler
+
+[T6 loc=111 grid=[{"w":"964"},{"w":"1247"},{"w":"2494"},{"w":"2438"},{"w":"1191"}]]
+
+[R1]
+[C1 width=@v18 shading=@v2]
+编号
+[C2 width=@v19 shading=@v2]
+HTTP方法
+[C3 width=@v20 shading=@v2]
+URL路径
+[C4 width=@v21 shading=@v2]
+功能说明
+[C5 width=@v12 shading=@v2]
+是否需鉴权
+
+[R2]
+[C1 width=@v18]
+API-01
+[C2 width=@v19]
+POST
+[C3 width=@v20]
+/api/users/register
+[C4 width=@v21]
+用户注册
+[C5 width=@v12]
+否
+
+[R3]
+[C1 width=@v18]
+API-02
+[C2 width=@v19]
+POST
+[C3 width=@v20]
+/api/users/login
+[C4 width=@v21]
+用户登录，返回访问令牌
+[C5 width=@v12]
+否
+
+[R4]
+[C1 width=@v18]
+API-03
+[C2 width=@v19]
+GET
+[C3 width=@v20]
+/api/users/me
+[C4 width=@v21]
+获取当前登录用户信息
+[C5 width=@v12]
+是
+
+[R5]
+[C1 width=@v18]
+API-04
+[C2 width=@v19]
+PUT
+[C3 width=@v20]
+/api/users/me
+[C4 width=@v21]
+更新当前用户信息
+[C5 width=@v12]
+是
+
+[R6]
+[C1 width=@v18]
+API-05
+[C2 width=@v19]
+DELETE
+[C3 width=@v20]
+/api/users/{id}
+[C4 width=@v21]
+按ID删除用户
+[C5 width=@v12]
+是（管理员）
+
+[R7]
+[C1 width=@v18]
+API-06
+[C2 width=@v19]
+GET
+[C3 width=@v20]
+/api/users
+[C4 width=@v21]
+分页查询用户列表，支持筛选与排序
+[C5 width=@v12]
+是（管理员）
+
+[R8]
+[C1 width=@v18]
+API-07
+[C2 width=@v19]
+PUT
+[C3 width=@v20]
+/api/users/{id}/password
+[C4 width=@v21]
+修改指定用户密码
+[C5 width=@v12]
+是
+
+[T7 loc=113 grid=[{"w":"1361"},{"w":"2608"},{"w":"4365"}]]
+
+[R1]
+[C1 width=@v22 shading=@v2]
+错误码
+[C2 width=@v23 shading=@v2]
+含义
+[C3 width=@v24 shading=@v2]
+触发场景
+
+[R2]
+[C1 width=@v22]
+200
+[C2 width=@v23]
+操作成功
+[C3 width=@v24]
+请求正常处理完成
+
+[R3]
+[C1 width=@v22]
+400
+[C2 width=@v23]
+请求参数有误
+[C3 width=@v24]
+缺少必填参数或参数格式不合法
+
+[R4]
+[C1 width=@v22]
+401
+[C2 width=@v23]
+未登录或登录已过期
+[C3 width=@v24]
+未携带令牌、令牌失效或用户名密码错误
+
+[R5]
+[C1 width=@v22]
+403
+[C2 width=@v23]
+没有操作权限
+[C3 width=@v24]
+越权访问他人数据，或非管理员调用管理接口
+
+[R6]
+[C1 width=@v22]
+404
+[C2 width=@v23]
+请求的资源不存在
+[C3 width=@v24]
+访问了不存在的资源ID
+
+[R7]
+[C1 width=@v22]
+500
+[C2 width=@v23]
+系统内部错误
+[C3 width=@v24]
+服务端未预期的异常
+
+[T8 loc=124 grid=[{"w":"1111"},{"w":"1501"},{"w":"1521"},{"w":"2733"},{"w":"1662"}]]
+
+[R1]
+[C1 width=@v19 shading=@v2]
+表名
+[C2 width=@v3 shading=@v2]
+字段名
+[C3 width=@v3 shading=@v2]
+类型
+[C4 width=@v25 shading=@v2]
+约束
+[C5 width=@v26 shading=@v2]
+说明
+
+[R2]
+[C1 width=@v19]
+user
+[C2 width=@v3]
+id
+[C3 width=@v3]
+bigint
+[C4 width=@v25]
+PK,AUTO_INCREMENT
+[C5 width=@v26]
+用户主键
+
+[R3]
+[C1 width=@v19]
+user
+[C2 width=@v3]
+username
+[C3 width=@v3]
+varchar(50)
+[C4 width=@v25]
+NOTNULL,UNIQUE
+[C5 width=@v26]
+用户名，唯一
+
+[R4]
+[C1 width=@v19]
+user
+[C2 width=@v3]
+password
+[C3 width=@v3]
+varchar(100)
+[C4 width=@v25]
+NOTNULL
+[C5 width=@v26]
+BCrypt加密后的密码
+
+[R5]
+[C1 width=@v19]
+user
+[C2 width=@v3]
+email
+[C3 width=@v3]
+varchar(100)
+[C4 width=@v25]
+NULL
+[C5 width=@v26]
+邮箱
+
+[R6]
+[C1 width=@v19]
+user
+[C2 width=@v3]
+status
+[C3 width=@v3]
+tinyint
+[C4 width=@v25]
+NOTNULL,DEFAULT1
+[C5 width=@v26]
+状态：1正常，0禁用
+
+[R7]
+[C1 width=@v19]
+user
+[C2 width=@v3]
+create_time
+[C3 width=@v3]
+datetime
+[C4 width=@v25]
+NOTNULL,DEFAULTNOW()
+[C5 width=@v26]
+创建时间
+
+[T9 loc=128 grid=[{"w":"2216"},{"w":"4127"},{"w":"2185"}]]
+
+[R1]
+[C1 width=@v23 shading=@v2]
+高频查询场景
+[C2 width=@v27 shading=@v2]
+建议索引
+[C3 width=@v28 shading=@v2]
+设计理由
+
+[R2]
+[C1 width=@v23]
+按用户ID+状态查询并按时间倒序
+[C2 width=@v27]
+idx_user_status_time(user_id,status,create_time)
+[C3 width=@v28]
+覆盖过滤与排序条件，避免额外排序开销
+
+[R3]
+[C1 width=@v23]
+按用户名精确查询
+[C2 width=@v27]
+uk_username(username)
+[C3 width=@v28]
+唯一约束同时满足等值查询需求
+
+[R4]
+[C1 width=@v23]
+按时间范围统计
+[C2 width=@v27]
+idx_create_time(create_time)
+[C3 width=@v28]
+支撑报表类范围扫描
+
+[T10 loc=133 grid=[{"w":"1304"},{"w":"1417"},{"w":"2551"},{"w":"2324"},{"w":"737"}]]
+
+[R1]
+[C1 width=@v9 shading=@v2]
+工具名称
+[C2 width=@v5 shading=@v2]
+使用环节
+[C3 width=@v28 shading=@v2]
+AI产出内容（含关键提示词）
+[C4 width=@v15 shading=@v2]
+人工确认与修改
+[C5 width=@v29 shading=@v2]
+占比
+
+[R2]
+[C1 width=@v9]
+（填写）
+[C2 width=@v5]
+（需求/设计/文档）
+[C3 width=@v28]
+（填写，须附提示词原文）
+[C4 width=@v15]
+（填写）
+[C5 width=@v29]
+（填写）
+
+[R3]
+[C1 width=@v9]
+（填写）
+[C2 width=@v5]
+（填写）
+[C3 width=@v28]
+（填写）
+[C4 width=@v15]
+（填写）
+[C5 width=@v29]
+（填写）
+
+[R4]
+[C1 width=@v9]
+（填写）
+[C2 width=@v5]
+（填写）
+[C3 width=@v28]
+（填写）
+[C4 width=@v15]
+（填写）
+[C5 width=@v29]
+（填写）

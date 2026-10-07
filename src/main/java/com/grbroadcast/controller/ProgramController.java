@@ -6,6 +6,7 @@ import com.grbroadcast.entity.User;
 import com.grbroadcast.service.ProgramService;
 import com.grbroadcast.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import java.time.LocalDateTime;
 
@@ -21,6 +22,7 @@ public class ProgramController {
     private UserService userService;
     // 发布节目（接收 userId 参数）
     @PostMapping("/publish")
+    @PreAuthorize("@ss.hasPermi('program:publish')")
     public Result publish(@RequestBody ProgramSchedule program, @RequestParam Long userId) {
         User user = userService.getById(userId);
         if (user == null || (!"staff".equals(user.getRole()))) {
@@ -34,6 +36,7 @@ public class ProgramController {
     }
     // 删除节目单
     @DeleteMapping("/delete/{id}")
+    @PreAuthorize("@ss.hasPermi('program:delete')")
     public Result deleteProgram(@PathVariable Long id) {
         return programService.removeById(id) ? Result.success("删除成功") : Result.error("删除失败");
     }
@@ -45,6 +48,7 @@ public class ProgramController {
 
     // 修改节目单
     @PutMapping("/update")
+    @PreAuthorize("@ss.hasPermi('program:edit')")
     public Result updateProgram(@RequestBody ProgramSchedule program) {
         return programService.updateById(program) ? Result.success("修改成功") : Result.error("修改失败");
     }
